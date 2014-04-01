@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>IQLTemp</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>com.antennasoftware.amp.studio.generated_java_builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>com.antennasoftware.amp.support.validation_builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>com.vaultus.studio.codegen_builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>com.antennasoftware.amp.studio.uiproject</nature>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>com.antennasoftware.amp.studio.mscript</nature>
+		<nature>com.antennasoftware.amp.studio.codegen_nature</nature>
+	</natures>
+</projectDescription>

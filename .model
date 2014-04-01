@@ -1,0 +1,786 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.vaultus.studio.ecore.studio:UIProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.vaultus.ecore.properties="http:///com/vaultus/ecore/properties.ecore" xmlns:com.vaultus.studio.ecore.log="http:///com/vaultus/studio/ecore/log.ecore" xmlns:com.vaultus.studio.ecore.studio="http:///com/vaultus/studio/ecore/studio.ecore" name="IQLTemp">
+  <properties xsi:type="com.vaultus.ecore.properties:StringProperty" name="appKey"/>
+  <properties xsi:type="com.vaultus.ecore.properties:BooleanProperty" name="appKeyEnabled" true="false"/>
+  <properties xsi:type="com.vaultus.ecore.properties:StringProperty" name="appKeyVersion" string="1.0.0"/>
+  <properties xsi:type="com.vaultus.ecore.properties:BooleanProperty" name="autostart"/>
+  <properties xsi:type="com.vaultus.ecore.properties:StringProperty" name="description"/>
+  <properties xsi:type="com.vaultus.ecore.properties:StringProperty" name="generatedPrefix" string="iqltemp.gen"/>
+  <properties xsi:type="com.vaultus.ecore.properties:BooleanProperty" name="hidden"/>
+  <properties xsi:type="com.vaultus.ecore.properties:StringProperty" name="lastPackage" string="iqltemp.transactions"/>
+  <properties xsi:type="com.vaultus.ecore.properties:StringProperty" name="lastSourceFolder" string="src"/>
+  <properties xsi:type="com.vaultus.studio.ecore.log:LogLevelProperty" name="logLevel" logLevel="INFO"/>
+  <properties xsi:type="com.vaultus.ecore.properties:IntegerProperty" name="majorVersion" integer="1"/>
+  <properties xsi:type="com.vaultus.ecore.properties:StringProperty" name="microVersion"/>
+  <properties xsi:type="com.vaultus.ecore.properties:IntegerProperty" name="minorVersion"/>
+  <properties xsi:type="com.vaultus.ecore.properties:StringProperty" name="projectId"/>
+  <properties xsi:type="com.vaultus.ecore.properties:StringProperty" name="title"/>
+  <properties xsi:type="com.vaultus.ecore.properties:BooleanProperty" name="useProjectId" true="true"/>
+  <properties xsi:type="com.vaultus.ecore.properties:StringProperty" name="versionQualifier"/>
+  <children xsi:type="com.vaultus.studio.ecore.studio:PropertiesNode" name="Properties"/>
+  <children xsi:type="com.vaultus.studio.ecore.studio:ImagesNode" name="Images">
+    <children xsi:type="com.vaultus.studio.ecore.studio:VScriptNode" name="Images.mscript" hidden="true"/>
+    <children xsi:type="com.vaultus.studio.ecore.studio:ImageSetNode" name="ANDROID" required="true" default="true" type="ANDROID">
+      <properties xsi:type="com.vaultus.ecore.properties:BooleanProperty" name="ANDROID" true="true"/>
+      <children xsi:type="com.vaultus.studio.ecore.studio:VScriptNode" name="ANDROID.mscript" hidden="true"/>
+      <imagePaths name="AboutIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="Icon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="OptionsIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="RolloverIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="RubberBandIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="ServerSetupIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImage">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscape">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscapeLeft">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscapeRight">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImagePortrait">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageUpsideDown">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+    </children>
+    <children xsi:type="com.vaultus.studio.ecore.studio:ImageSetNode" name="ANDROID_L" required="true" type="ANDROID">
+      <properties xsi:type="com.vaultus.ecore.properties:BooleanProperty" name="ANDROID" true="true"/>
+      <children xsi:type="com.vaultus.studio.ecore.studio:VScriptNode" name="ANDROID_L.mscript" hidden="true"/>
+      <imagePaths name="AboutIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="Icon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="OptionsIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="RolloverIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="RubberBandIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="ServerSetupIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImage">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscape">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscapeLeft">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscapeRight">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImagePortrait">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageUpsideDown">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+    </children>
+    <children xsi:type="com.vaultus.studio.ecore.studio:ImageSetNode" name="ANDROID_S" required="true" type="ANDROID">
+      <properties xsi:type="com.vaultus.ecore.properties:BooleanProperty" name="ANDROID" true="true"/>
+      <children xsi:type="com.vaultus.studio.ecore.studio:VScriptNode" name="ANDROID_S.mscript" hidden="true"/>
+      <imagePaths name="AboutIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="Icon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="OptionsIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="RolloverIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="RubberBandIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="ServerSetupIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImage">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscape">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscapeLeft">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscapeRight">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImagePortrait">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageUpsideDown">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+    </children>
+    <children xsi:type="com.vaultus.studio.ecore.studio:ImageSetNode" name="ANDROID_X" required="true" type="ANDROID">
+      <properties xsi:type="com.vaultus.ecore.properties:BooleanProperty" name="ANDROID" true="true"/>
+      <children xsi:type="com.vaultus.studio.ecore.studio:VScriptNode" name="ANDROID_X.mscript" hidden="true"/>
+      <imagePaths name="AboutIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="Icon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="OptionsIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="RolloverIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="RubberBandIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="ServerSetupIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImage">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscape">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscapeLeft">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscapeRight">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImagePortrait">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageUpsideDown">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+    </children>
+    <children xsi:type="com.vaultus.studio.ecore.studio:ImageSetNode" name="BOLD" required="true" type="BLACKBERRY">
+      <properties xsi:type="com.vaultus.ecore.properties:BooleanProperty" name="BLACKBERRY" true="true"/>
+      <children xsi:type="com.vaultus.studio.ecore.studio:VScriptNode" name="BOLD.mscript" hidden="true"/>
+      <imagePaths name="AboutIcon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="Icon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="OptionsIcon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="RolloverIcon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="RubberBandIcon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="ServerSetupIcon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImage">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscape">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscapeLeft">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscapeRight">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImagePortrait">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageUpsideDown">
+        <properties/>
+      </imagePaths>
+    </children>
+    <children xsi:type="com.vaultus.studio.ecore.studio:ImageSetNode" name="CURVE" required="true" default="true" type="BLACKBERRY">
+      <properties xsi:type="com.vaultus.ecore.properties:BooleanProperty" name="BLACKBERRY" true="true"/>
+      <children xsi:type="com.vaultus.studio.ecore.studio:VScriptNode" name="CURVE.mscript" hidden="true"/>
+      <imagePaths name="AboutIcon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="Icon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="OptionsIcon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="RolloverIcon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="RubberBandIcon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="ServerSetupIcon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImage">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscape">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscapeLeft">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscapeRight">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImagePortrait">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageUpsideDown">
+        <properties/>
+      </imagePaths>
+    </children>
+    <children xsi:type="com.vaultus.studio.ecore.studio:ImageSetNode" name="IPAD" required="true" default="true" type="IPAD">
+      <properties xsi:type="com.vaultus.ecore.properties:BooleanProperty" name="IPAD" true="true"/>
+      <children xsi:type="com.vaultus.studio.ecore.studio:VScriptNode" name="IPAD.mscript" hidden="true"/>
+      <imagePaths name="AboutIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="Icon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="OptionsIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="RolloverIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="RubberBandIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="ServerSetupIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImage">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscape">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscapeLeft">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscapeRight">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImagePortrait">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageUpsideDown">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+    </children>
+    <children xsi:type="com.vaultus.studio.ecore.studio:ImageSetNode" name="IPHONE" required="true" default="true" type="IPHONE">
+      <properties xsi:type="com.vaultus.ecore.properties:BooleanProperty" name="IPHONE" true="true"/>
+      <properties xsi:type="com.vaultus.ecore.properties:BooleanProperty" name="IPHONE4" true="true"/>
+      <children xsi:type="com.vaultus.studio.ecore.studio:VScriptNode" name="IPHONE.mscript" hidden="true"/>
+      <imagePaths name="AboutIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="Icon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="OptionsIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="RolloverIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="RubberBandIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="ServerSetupIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImage">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscape">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscapeLeft">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscapeRight">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImagePortrait">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageUpsideDown">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+    </children>
+    <children xsi:type="com.vaultus.studio.ecore.studio:ImageSetNode" name="PEARL" required="true" type="BLACKBERRY">
+      <properties xsi:type="com.vaultus.ecore.properties:BooleanProperty" name="BLACKBERRY" true="true"/>
+      <children xsi:type="com.vaultus.studio.ecore.studio:VScriptNode" name="PEARL.mscript" hidden="true"/>
+      <imagePaths name="AboutIcon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="Icon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="OptionsIcon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="RolloverIcon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="RubberBandIcon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="ServerSetupIcon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImage">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscape">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscapeLeft">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscapeRight">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImagePortrait">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageUpsideDown">
+        <properties/>
+      </imagePaths>
+    </children>
+    <children xsi:type="com.vaultus.studio.ecore.studio:ImageSetNode" name="STORM" required="true" type="BLACKBERRY">
+      <properties xsi:type="com.vaultus.ecore.properties:BooleanProperty" name="BLACKBERRY" true="true"/>
+      <children xsi:type="com.vaultus.studio.ecore.studio:VScriptNode" name="STORM.mscript" hidden="true"/>
+      <imagePaths name="AboutIcon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="Icon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="OptionsIcon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="RolloverIcon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="RubberBandIcon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="ServerSetupIcon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImage">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscape">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscapeLeft">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscapeRight">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImagePortrait">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageUpsideDown">
+        <properties/>
+      </imagePaths>
+    </children>
+    <children xsi:type="com.vaultus.studio.ecore.studio:ImageSetNode" name="WM" required="true" default="true" type="WINDOWS">
+      <properties xsi:type="com.vaultus.ecore.properties:BooleanProperty" name="NET" true="true"/>
+      <properties xsi:type="com.vaultus.ecore.properties:BooleanProperty" name="POCKETPC" true="true"/>
+      <properties xsi:type="com.vaultus.ecore.properties:BooleanProperty" name="SMARTPHONE" true="true"/>
+      <children xsi:type="com.vaultus.studio.ecore.studio:VScriptNode" name="WM.mscript" hidden="true"/>
+      <imagePaths name="AboutIcon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="Icon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="OptionsIcon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="RolloverIcon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="RubberBandIcon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="ServerSetupIcon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImage">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscape">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscapeLeft">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageLandscapeRight">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImagePortrait">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="SplashImageUpsideDown">
+        <properties/>
+      </imagePaths>
+    </children>
+    <images name="AboutIcon"/>
+    <images name="Icon"/>
+    <images name="OptionsIcon"/>
+    <images name="RolloverIcon"/>
+    <images name="RubberBandIcon"/>
+    <images name="ServerSetupIcon"/>
+    <images name="SplashImage"/>
+    <images name="SplashImageLandscape"/>
+    <images name="SplashImageLandscapeLeft"/>
+    <images name="SplashImageLandscapeRight"/>
+    <images name="SplashImagePortrait"/>
+    <images name="SplashImageUpsideDown"/>
+  </children>
+  <children xsi:type="com.vaultus.studio.ecore.studio:SoundsNode" name="SoundEffects">
+    <children xsi:type="com.vaultus.studio.ecore.studio:VScriptNode" name="SoundEffects.mscript" hidden="true"/>
+    <children xsi:type="com.vaultus.studio.ecore.studio:SoundSetNode" name="ANDROID" hidden="true"/>
+    <children xsi:type="com.vaultus.studio.ecore.studio:SoundSetNode" name="OBJC" hidden="true"/>
+  </children>
+  <children xsi:type="com.vaultus.studio.ecore.studio:VideosNode" name="Videos">
+    <children xsi:type="com.vaultus.studio.ecore.studio:VScriptNode" name="Videos.mscript" hidden="true"/>
+    <children xsi:type="com.vaultus.studio.ecore.studio:VideoSetNode" name="ANDROID" hidden="true"/>
+    <children xsi:type="com.vaultus.studio.ecore.studio:VideoSetNode" name="OBJC" hidden="true"/>
+  </children>
+  <children xsi:type="com.vaultus.studio.ecore.studio:DocumentsNode" name="Documents">
+    <children xsi:type="com.vaultus.studio.ecore.studio:VScriptNode" name="Documents.mscript" hidden="true"/>
+    <children xsi:type="com.vaultus.studio.ecore.studio:DocumentSetNode" name="ANDROID" hidden="true"/>
+    <children xsi:type="com.vaultus.studio.ecore.studio:DocumentSetNode" name="OBJC" hidden="true"/>
+  </children>
+  <children xsi:type="com.vaultus.studio.ecore.studio:ColorsNode" name="Colors">
+    <children xsi:type="com.vaultus.studio.ecore.studio:VScriptNode" name="Colors.mscript" hidden="true"/>
+    <colors name="CompanyNavBarBG" color="-13881811"/>
+  </children>
+</com.vaultus.studio.ecore.studio:UIProject>
