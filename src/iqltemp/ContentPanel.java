@@ -1,6 +1,7 @@
 package iqltemp;
 
 import iqltemp.listeners.OnSelectedListener;
+import iqltemp.overview.OverviewPanel;
 import iqltemp.transactions.TransactionsPanel;
 
 import com.antennasoftware.api.ui.Colors;
@@ -8,14 +9,19 @@ import com.antennasoftware.api.ui.Container;
 import com.antennasoftware.api.ui.ContainerListener;
 import com.antennasoftware.api.ui.Screen;
 import com.antennasoftware.api.ui.Widget;
+import com.antennasoftware.api.ui.panel.Panel;
 import com.antennasoftware.api.ui.panel.StackPanel;
 import com.antennasoftware.api.ui.styles.StyleReceptor;
 
 public class ContentPanel extends StackPanel implements ContainerListener {
+	public OverviewPanel overviewPanel;
 	public TransactionsPanel transactionsPanel;
 	
 	public int orientation;
 	public Screen containerScreen;
+	
+	public static final int CONTENTPANELTYPE_OVERVIEW = 0;
+	public static final int CONTENTPANELTYPE_TRANSACTIONS = 1;
 	
 	public ContentPanel() {
 		this.addListener(this);
@@ -43,9 +49,13 @@ public class ContentPanel extends StackPanel implements ContainerListener {
 		
 		setBackColor(Colors.Chocolate);
 		
+		overviewPanel = new OverviewPanel();
+		add(overviewPanel);
+		
 		transactionsPanel = new TransactionsPanel();
 		add(transactionsPanel);
-		select(transactionsPanel);
+		
+		select(overviewPanel);
 	}
 
 	public void onDeactivate(Container source) {
@@ -69,6 +79,23 @@ public class ContentPanel extends StackPanel implements ContainerListener {
 		this.orientation = orientation;
 		
 		this.transactionsPanel.setOrientation(orientation);
+		this.overviewPanel.setOrientation(orientation);
+	}
+	
+	public void switchPanel(int panelType ){
+		Panel panel = null;
+		
+		switch(panelType){
+		case CONTENTPANELTYPE_OVERVIEW:
+			panel = overviewPanel;
+			break;
+		case CONTENTPANELTYPE_TRANSACTIONS:
+			panel = transactionsPanel;
+			break;
+		}
+		if( panel != null ){
+			select(panel);
+		}
 	}
 
 }

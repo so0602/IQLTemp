@@ -66,6 +66,7 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 		mainPanel.startNewRow();
 		
 		menuPanel = new MenuPanel();
+		menuPanel.screen = this;
 		mainPanel.add(menuPanel,"hfill=fill,vfill=fill");
 		
 		contentPanel = new ContentPanel();

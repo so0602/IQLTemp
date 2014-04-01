@@ -12,9 +12,12 @@ import com.antennasoftware.api.ui.styles.StyleReceptor;
 import com.antennasoftware.core.ui.control.ControlActionListener;
 
 public class MenuPanel extends TablePanel implements ContainerListener, ControlActionListener {
+	public Button overviewButton;
 	public Button transactionsButton;
 	
 	public int orientation;
+	
+	public MainScreen screen;
 	
 	public MenuPanel() {
 		this.addListener(this);
@@ -42,6 +45,12 @@ public class MenuPanel extends TablePanel implements ContainerListener, ControlA
 
 		setBackColor(Colors.DarkGray);
 		setColumnWidth(0, Sizing.PIXELS, 143);
+		
+		overviewButton = new Button();
+		overviewButton.setText("Overview");
+		overviewButton.addListener(this);
+		add(overviewButton, "hfill=fill, vfill=fill");
+		startNewRow();
 		
 		transactionsButton = new Button();
 		transactionsButton.setText("Transactions");
@@ -79,8 +88,10 @@ public class MenuPanel extends TablePanel implements ContainerListener, ControlA
 
 	public void onClick(Control c) {
 		// TODO Auto-generated method stub
-		if( c.equals(this.transactionsButton) ){
-			
+		if( c.equals(this.overviewButton) ){
+			screen.contentPanel.switchPanel(ContentPanel.CONTENTPANELTYPE_OVERVIEW);
+		}else if( c.equals(this.transactionsButton) ){
+			screen.contentPanel.switchPanel(ContentPanel.CONTENTPANELTYPE_TRANSACTIONS);
 		}
 	}
 
