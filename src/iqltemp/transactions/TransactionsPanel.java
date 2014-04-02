@@ -210,7 +210,7 @@ public class TransactionsPanel extends TablePanel implements ContainerListener, 
 					listPanel.startNewRow();
 					
 					listTable = new StickyTable();
-					listTable.addListener(this);
+					//listTable.addListener(this);
 					listTable.setNumberOfGroups(dataSources.size());
 					for( int i = 0; i < dataSources.size(); i++ ){
 						ObjectMap map = (ObjectMap)dataSources.getItem(i);
@@ -431,8 +431,7 @@ public class TransactionsPanel extends TablePanel implements ContainerListener, 
 	}
 
 	public void onSelectionChanged(TableView c, int group, int row) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
 	
 	public boolean addOnSelectedListener(OnSelectedListener onSelectedListener){
