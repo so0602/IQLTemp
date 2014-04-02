@@ -54,7 +54,7 @@ public class NavigationPanel extends TablePanel implements ContainerListener {
 	public void onCreate(Container source) {
 		// TODO Auto-generated method stub
 		
-		setBackColor(Colors.Black);
+		setBackColor(Colors.Red);
 		setRowHeight(0, Sizing.PIXELS, 43);
 		setRowHeight(1, Sizing.PIXELS, 1);
 		setColumnWidth(0, Sizing.PREFERRED, 0);
@@ -84,7 +84,7 @@ public class NavigationPanel extends TablePanel implements ContainerListener {
 		separator.setBackColor(Color.create(197, 197, 197));
 		add(separator, "hfill=fill, vfill=fill, colspan=5");
 		
-		setNavigationStyle(NAVIGATION_STYLE_BLACK);
+		setNavigationStyle(NAVIGATION_STYLE_DEBUG);
 	}
 
 	public void onDeactivate(Container source) {

@@ -77,7 +77,7 @@ public class IqltempApplication extends IQLTemp implements ApplicationListener,
 		if( log == null ){
 			log = getLog();
 		}
-		log.log(Log.INFO, "[" + strClass + "::" + strMethod + "]" + strLog);
+		log.log(Log.INFO, "[" + strClass + "::" + strMethod + "] - " + strLog);
 	}
 	
 	public DefaultStyle getStyle(){
