@@ -210,7 +210,7 @@ public class TransactionsPanel extends TablePanel implements ContainerListener, 
 					listPanel.startNewRow();
 					
 					listTable = new StickyTable();
-					//listTable.addListener(this);
+					listTable.addListener(this);
 					listTable.setNumberOfGroups(dataSources.size());
 					for( int i = 0; i < dataSources.size(); i++ ){
 						ObjectMap map = (ObjectMap)dataSources.getItem(i);

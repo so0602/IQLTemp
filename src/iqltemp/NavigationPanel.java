@@ -59,10 +59,9 @@ public class NavigationPanel extends TablePanel implements ContainerListener {
 		setColumnWidth(1, Sizing.PERCENTS, 50);
 		setColumnWidth(2, Sizing.PERCENTS, 25);
 		
-				
 		leftButtonPanel = new TablePanel();
 		leftButtonPanel.setColumnWidth(0, Sizing.PIXELS, 12);
-		leftButtonPanel.setColumnWidth(1, Sizing.PREFERRED, 0);		
+		leftButtonPanel.setColumnWidth(1, Sizing.PREFERRED, 1);		
 		leftButtonPanel.setRowHeight(0, Sizing.PREFERRED, 1);	
 		add(leftButtonPanel, "hfill=fill, vfill=fill"); // Column 0
 		

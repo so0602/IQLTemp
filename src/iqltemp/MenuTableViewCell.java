@@ -1,6 +1,7 @@
 package iqltemp;
 
 import com.antennasoftware.api.ui.Color;
+import com.antennasoftware.api.ui.Colors;
 import com.antennasoftware.api.ui.Container;
 import com.antennasoftware.api.ui.Sizing;
 import com.antennasoftware.api.ui.TableViewCellListener;
@@ -41,23 +42,30 @@ public class MenuTableViewCell extends TableViewCell implements
 
 	public void onCreate(Container source) {
 		// TODO Auto-generated method stub
+		setRowHeight(0, Sizing.PREFERRED, 1);
+		setColumnWidth(0, Sizing.PREFERRED, 1);
+		
 		titleLabel = new Label();
 		titleLabel.setForeColor(Color.create(203, 203, 203));
 		
 		mainPanel = new TablePanel();
-		mainPanel.setBackColor(Color.create(68, 68, 68));
+		mainPanel.setBackColor(Color.create(68, 68, 68));	
 		mainPanel.setRowHeight(0, Sizing.PREFERRED, 1);
 		mainPanel.setRowHeight(1, Sizing.PIXELS, 1);		
 		mainPanel.setColumnWidth(0, Sizing.PIXELS, 12);
-		mainPanel.setColumnWidth(1, Sizing.PREFERRED, 0);
+		mainPanel.setColumnWidth(1, Sizing.PREFERRED, 1);
 				
 		mainPanel.add(new Separator());
-		mainPanel.add(titleLabel, "hfill=fill,vfill=fill");
+		mainPanel.add(titleLabel, "hfill=fill,vfill=fill,valign=center");
 		mainPanel.startNewRow();
 		
 		Separator separator = new Separator();
 		separator.setBackColor(Color.create(59, 59, 59));
-		add(separator, "hfill=fill, vfill=fill, colspan=2");
+		mainPanel.add(separator, "hfill=fill, vfill=fill, colspan=2");
+		
+		add(mainPanel, "hfill=fill, vfill=fill");
+		
+		
 		
 	}
 

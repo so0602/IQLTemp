@@ -4,6 +4,7 @@ import iqltemp.transactions.TransactionsListTableHeader;
 import iqltemp.transactions.TransactionsListTableViewCell;
 
 import com.antennasoftware.api.ui.AbsoluteSize;
+import com.antennasoftware.api.ui.Color;
 import com.antennasoftware.api.ui.Colors;
 import com.antennasoftware.api.ui.Container;
 import com.antennasoftware.api.ui.ContainerListener;
@@ -37,7 +38,7 @@ public class MenuPanel extends TablePanel implements ContainerListener, ControlA
 	public Button overviewButton;
 	public Button transactionsButton;
 	
-	private StickyTable menuTable;
+	private StickyTable stkTable;
 	private ObjectArray dataSources;	
 	
 	public int orientation;
@@ -95,17 +96,16 @@ public class MenuPanel extends TablePanel implements ContainerListener, ControlA
 //		add(transactionsButton, "hfill=fill, vfill=fill");
 //		startNewRow();
 		
-		menuTable = new StickyTable();
-		//listTable.setGridLineStyle(LineStyle.NONE);
-		menuTable.addListener(this);
-		menuTable.setNumberOfGroups(1);
-		menuTable.setNumberOfCellsInGroup(dataSources.size(), 0);
-//		listTable.setItemCount(dataSources.size());
-//		listTable.setColumnCount(1);
-//		listTable.setColumnWidth(0, Sizing.PREFERRED, 1);
+		stkTable = new StickyTable();
+		stkTable.setBackColor(Color.create(68, 68, 68));
+		stkTable.setGridLineStyle(LineStyle.NONE);
+		stkTable.addListener(this);
+		stkTable.setNumberOfGroups(1);
+		stkTable.setNumberOfCellsInGroup(0,dataSources.size());
 		
-		add(menuTable, "hfill=fill, vfill=fill");
+		add(stkTable, "hfill=fill, vfill=fill");
 
+		stkTable.refresh();
 	}
 
 	public void onDeactivate(Container source) {
@@ -163,7 +163,7 @@ public class MenuPanel extends TablePanel implements ContainerListener, ControlA
 	public void onCellConfigure(TableView c, CellConfig cell, int group) {
 		// TODO Auto-generated method stub
 		cell.setHeight(Sizing.PIXELS, 48);
-		cell.setWidth(Sizing.PREFERRED, 0);
+		cell.setWidth(Sizing.PREFERRED, 1);
 		cell.setCouldBeSelected(true);
 	}
 
@@ -184,7 +184,8 @@ public class MenuPanel extends TablePanel implements ContainerListener, ControlA
 	public void onCellSize(TableView c, AbsoluteSize sizeInfo, int group,
 			int row) {
 		// TODO Auto-generated method stub
-		
+		sizeInfo.setHeight(48);
+		//sizeInfo.setSize(1000, 67);
 	}
 
 	public void onCellType(TableView c, CellType type, int group, int row) {
@@ -209,7 +210,7 @@ public class MenuPanel extends TablePanel implements ContainerListener, ControlA
 
 	public void onEnterKey(TableView c, int group, int row) {
 		// TODO Auto-generated method stub
-		
+		onSelection(group,row);		
 	}
 
 	public void onFooterConfigure(TableView c, CellConfig cell, int group) {
@@ -266,6 +267,29 @@ public class MenuPanel extends TablePanel implements ContainerListener, ControlA
 		
 	}
 
+	public void onSelection(int group, int row){
+		//selectedRow=row;
+		//stkTable.refresh();
+
+		
+		if( row==0 ){
+			screen.contentPanel.switchPanel(ContentPanel.CONTENTPANELTYPE_OVERVIEW);
+		}else if( row==6 ){
+			screen.contentPanel.switchPanel(ContentPanel.CONTENTPANELTYPE_TRANSACTIONS);
+		}
+		
+//		if( row == transactionsData.length() ) {
+//			//Map compArg = (Map)getArgumentForScreen( SCREEN_NAME);
+//			//long companyId = Platform.parseLong(compArg.getValue("id"));
+//			appLog.log(Log.FINE, "New transaction list count: " + (row + 20));
+//			cacheManager.getTransactionListForListsVRPC(sessionID,nListId,"WatchList",row+20,30,true,null);
+//	
+//		}
+//		else {
+//			CompanyIntelligence.Transactions.TransactionItem transaction = (CompanyIntelligence.Transactions.TransactionItem)transactionsData.getItem(row);
+//			pushNewScreen("scrTransactionDetail",transaction);
+//		}
+	}	
 
 
 }
