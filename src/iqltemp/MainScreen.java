@@ -4,6 +4,7 @@ import iqltemp.listeners.OnDimissScreenListener;
 import iqltemp.listeners.OnSelectedListener;
 import iqltemp.transactions.TransactionDetailPanel;
 
+import com.antennasoftware.api.platform.Boolean;
 import com.antennasoftware.api.ui.Background;
 import com.antennasoftware.api.ui.Color;
 import com.antennasoftware.api.ui.Colors;
@@ -13,16 +14,26 @@ import com.antennasoftware.api.ui.Screen;
 import com.antennasoftware.api.ui.ScreenListener;
 import com.antennasoftware.api.ui.Sizing;
 import com.antennasoftware.api.ui.Widget;
+import com.antennasoftware.api.ui.control.Button;
+import com.antennasoftware.api.ui.control.Control;
+import com.antennasoftware.api.ui.panel.ScrollableHorizontalPanel;
 import com.antennasoftware.api.ui.panel.TablePanel;
 import com.antennasoftware.api.ui.styles.StyleReceptor;
+import com.antennasoftware.core.ui.control.ControlActionListener;
 
-public class MainScreen extends Screen implements ScreenListener, OnSelectedListener {
-	TablePanel mainPanel;
+public class MainScreen extends Screen implements ScreenListener, OnSelectedListener, ControlActionListener {
+	private ScrollableHorizontalPanel basePanel;
+	private TablePanel hiddenLeftPanel;
+	private TablePanel mainPanel;
+		
+	private NavigationPanel navigationPanel;
+	private Button addToWatchlistButton = new Button();
+	private CompanyPanel comapnyPanel;
+	private MenuPanel menuPanel;
+	public ContentPanel contentPanel;
+	private AddToWatchlistPanel addToWatchlistPanel = new AddToWatchlistPanel();
 	
-	NavigationPanel navigationPanel;
-	CompanyPanel comapnyPanel;
-	MenuPanel menuPanel;
-	ContentPanel contentPanel;
+	private boolean toggle;
 	
 	public int orientation;
 
@@ -49,6 +60,12 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 
 	public void onCreate(Container source) {
 		// TODO Auto-generated method stub
+		basePanel = new ScrollableHorizontalPanel();
+		basePanel.enableBounce(false);
+		basePanel.enableScroll(false);
+		
+		hiddenLeftPanel = new TablePanel();
+		hiddenLeftPanel.setColumnWidth(0, Sizing.PIXELS, 1);
 		
 		mainPanel = new TablePanel();
 		mainPanel.setColumnWidth(0, Sizing.PREFERRED, 0);
@@ -57,8 +74,13 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 		
 		navigationPanel = new NavigationPanel();
 		navigationPanel.setTitle("APPLE INC.L TRANSACTIONS");
-		mainPanel.add(navigationPanel, "hfill=fill, colspan=2");
 		
+		addToWatchlistButton.addListener(this);
+		addToWatchlistButton.setText("Add To Watchlist");
+		
+		navigationPanel.addRightButton(addToWatchlistButton);
+		mainPanel.add(navigationPanel, "hfill=fill, colspan=2");
+				
 		mainPanel.startNewRow();
 		
 		comapnyPanel = new CompanyPanel();
@@ -75,7 +97,17 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 		
 		mainPanel.startNewRow();
 		
-		add(mainPanel, "hfill=fill, vfill=fill");
+		
+		//add(mainPanel, "hfill=fill, vfill=fill");		
+		basePanel.add(hiddenLeftPanel, "vfill=fill");
+		basePanel.add(mainPanel, "vfill=fill");
+		basePanel.add(addToWatchlistPanel, " vfill=fill");
+		basePanel.setColumnWidth(0, Sizing.PIXELS, 0);
+		basePanel.setColumnWidth(1, Sizing.PERCENTS, 100);
+		basePanel.setColumnWidth(2, Sizing.PIXELS, 243);
+			
+		add(basePanel, "hfill=fill, vfill=fill");
+		
 	}
 
 	public void onDeactivate(Container source) {
@@ -177,5 +209,30 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 //		this.presentAsFullScreen(panel);
 		this.presentAsFullScreen(panel, 35, 35, 175, 155, background);
 	}
+	
+	public void onClick(Control c) {
+		// TODO Auto-generated method stub
+		if( this.addToWatchlistButton.equals(c) ){
+			if (toggle) {
+				basePanel.reveal(hiddenLeftPanel, ScrollableHorizontalPanel.POSITION_RIGHT);
+				//basePanel.refresh();
+				toggle = false;
+			} else {
+				basePanel.reveal(addToWatchlistPanel);
+				toggle = true;
+			}	
+			
+		}
+	}
+
+	public void onFocusGained(Control c) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void onFocusLost(Control c) {
+		// TODO Auto-generated method stub
+		
+	}	
 
 }
