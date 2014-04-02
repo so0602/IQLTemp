@@ -15,7 +15,6 @@ import com.antennasoftware.api.ui.styles.StyleReceptor;
 
 public class CompanyPanel extends TablePanel implements ContainerListener {
 	public int orientation;
-	
 	private Label companyNameLabel;
 	private Label updateTimeLabel;
 	private Label currencyLabel;
