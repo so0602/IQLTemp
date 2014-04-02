@@ -183,9 +183,8 @@ public class OverviewBusDescTableViewCell extends TableViewCell implements
 			rightTablePanel.add(titleLabel,"hfill=fill, vfill=fill");
 			
 			headquartersLabel = new Label();
-			headquartersLabel.setText("111 Street, New York USA, 111 Street, New York USA, 111 Street, New York USA, 111 Street, New York USA");
+			headquartersLabel.setText("111 Street, New York USA");
 			headquartersLabel.setFont(valueFont);
-			headquartersLabel.setBackColor(Colors.Aquamarine);
 			headquartersLabel.setHorizontalAlignment(HorizontalAlignmentType.RIGHT);
 			
 			fontHeight = (valueFont.getSize() + 2) * 3;
@@ -229,8 +228,9 @@ public class OverviewBusDescTableViewCell extends TableViewCell implements
 		
 		descrptionLabel = new Label();
 		descrptionLabel.setText("Apple Inc., together with subsidiaries, designs, manufactures, and markets mobile communication and media devices, personal computing products, and portable digital music players worldwide. Apple Inc., together with subsidiaries, designs, manufactures, and markets mobile communication and media devices, personal computing products, and portable digital music players worldwide. Apple Inc., together with subsidiaries, designs, manufactures, and markets mobile communication and media devices, personal computing products, and portable digital music players worldwide. Apple Inc., together with subsidiaries, designs, manufactures, and markets mobile communication and media devices, personal computing products, and portable digital music players worldwide. Apple Inc., together with subsidiaries, designs, manufactures, and markets mobile communication and media devices, personal computing products, and portable digital music players worldwide. ");
-//		descrptionLabel.setVisible(isExpand);
 		add(descrptionLabel,"hfill=fill, vfill=fill, colspan=4");
+		
+		//application.log("OverviewBusDescTableCell", strMethod, strLog)
 	}
 
 	public void onDeactivate(Container source) {
@@ -291,7 +291,6 @@ public class OverviewBusDescTableViewCell extends TableViewCell implements
 			if( onSizeChangeListener != null ){
 				onSizeChangeListener.onSizeChange(this);
 			}
-//			descrptionLabel.setVisible(isExpand);
 		}
 	}
 

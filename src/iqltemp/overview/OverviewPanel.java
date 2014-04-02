@@ -127,8 +127,8 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 
 	public void onCellConfigure(TableView c, CellConfig cell, int group) {
 		// TODO Auto-generated method stub
-		cell.setHeight(Sizing.PREFERRED, 0);
-		cell.setWidth(Sizing.PREFERRED, 0);
+		cell.setHeight(Sizing.PREFERRED, 1);
+		cell.setWidth(Sizing.PREFERRED, 1);
 		cell.setCouldBeSelected(false);
 		
 	}
