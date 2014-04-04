@@ -1,5 +1,10 @@
 package iqltemp.overview;
 
+import iqltemp.DefaultStyle;
+import iqltemp.IqltempApplication;
+import iqltemp.listeners.OnSizeChangeListener;
+
+import com.antennasoftware.api.application.Application;
 import com.antennasoftware.api.ui.AbsoluteSize;
 import com.antennasoftware.api.ui.Container;
 import com.antennasoftware.api.ui.ContainerListener;
@@ -20,14 +25,16 @@ import com.antennasoftware.api.ui.panel.TablePanel;
 import com.antennasoftware.api.ui.panel.TableViewCell;
 import com.antennasoftware.api.ui.panel.TableViewPanel;
 import com.antennasoftware.api.ui.styles.StyleReceptor;
-import com.antennasoftware.core.ui.control.ControlActionListener;
 
-public class OverviewPanel extends TablePanel implements ContainerListener, TableViewActionListener {
+public class OverviewPanel extends TablePanel implements ContainerListener, TableViewActionListener, OnSizeChangeListener {
+	private IqltempApplication application;
+	private DefaultStyle style;
+	
 	public int orientation;
 
 	private StickyTable mainTable;
 	
-	private OverviewBusDescPanel busDescPanel;
+	private OverviewBusDescTableViewCell busDescTableViewCell;
 
 	public static final int OVERVIEW_GAPWIDTH = 13;
 	
@@ -54,9 +61,8 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 
 	public void onCreate(Container source) {
 		// TODO Auto-generated method stub
-//		busDescPanel = new OverviewBusDescPanel();
-//		add(busDescPanel, "hfill=fill, vfill=fill");
-//		startNewRow();
+		application = (IqltempApplication)getApplication();
+		style = application.getStyle();
 		
 		mainTable = new StickyTable();
 		mainTable.addListener(this);
@@ -127,29 +133,49 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 
 	public void onCellConfigure(TableView c, CellConfig cell, int group) {
 		// TODO Auto-generated method stub
-		cell.setHeight(Sizing.PREFERRED, 0);
-		cell.setWidth(Sizing.PREFERRED, 0);
-		cell.setCouldBeSelected(false);
-		
+		cell.setHeight(Sizing.PREFERRED, 1);
+		cell.setWidth(Sizing.PREFERRED, 1);
+		cell.setCouldBeSelected(true);
 	}
 
 	public void onCellCreateInfo(TableView c, TableViewCellCreateInfo info,
 			int group, int row) {
 		// TODO Auto-generated method stub
-		info.setPanel(new OverviewBusDescTableViewCell());
+		TableViewCell cell = null;
+		switch( row ){
+		case 0:
+			cell = new OverviewBusDescTableViewCell();
+			break;
+		}
+		info.setPanel(cell);
+		application.log(this.toString(), "onCellCreateInfo", cell.toString());
 	}
 
 	public void onCellInfo(TableView c, TableViewCell cell, Cell info,
 			int group, int row) {
 		// TODO Auto-generated method stub
-		
+		application.log(this.toString(), "onCellInfo", cell.toString());
+		if( cell instanceof OverviewBusDescTableViewCell ){
+			boolean needReload = busDescTableViewCell == null;
+			busDescTableViewCell = (OverviewBusDescTableViewCell)cell;
+			busDescTableViewCell.addOnSizeChangeListener(this);
+			if( needReload ){
+				c.reload(group, row);
+			}
+		}
 	}
 
 	public void onCellSize(TableView c, AbsoluteSize sizeInfo, int group,
 			int row) {
 		// TODO Auto-generated method stub
-		
-		sizeInfo.setSize(1000, 300);
+		switch( row ){
+		case 0:
+			sizeInfo.setSize(1024, busDescTableViewCell.getHeight());
+			break;
+		default:
+			sizeInfo.setSize(1024, 0);
+			break;
+		}
 	}
 
 	public void onCellType(TableView c, CellType type, int group, int row) {
@@ -229,5 +255,10 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 	public void onSelectionChanged(TableView c, int group, int row) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void onSizeChange(TableViewCell cell) {
+		// TODO Auto-generated method stub
+		mainTable.layout();
 	}
 }

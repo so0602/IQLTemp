@@ -77,7 +77,6 @@ public class NavigationPanel extends TablePanel implements ContainerListener {
 		add(rightButtonPanel, "hfill=fill, vfill=fill"); // Column 2		
 		
 		setNavigationStyle(NAVIGATION_STYLE_BLACK);
-		
 	}
 
 	public void onDeactivate(Container source) {

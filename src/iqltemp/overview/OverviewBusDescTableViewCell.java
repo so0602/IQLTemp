@@ -2,22 +2,21 @@ package iqltemp.overview;
 
 import iqltemp.DefaultStyle;
 import iqltemp.IqltempApplication;
+import iqltemp.Utilities;
 import iqltemp.listeners.OnSizeChangeListener;
 
 import com.antennasoftware.api.ui.Color;
-import com.antennasoftware.api.ui.Colors;
 import com.antennasoftware.api.ui.Container;
 import com.antennasoftware.api.ui.Font;
 import com.antennasoftware.api.ui.HorizontalAlignmentType;
 import com.antennasoftware.api.ui.Sizing;
 import com.antennasoftware.api.ui.TableViewCellListener;
-import com.antennasoftware.api.ui.VerticalAlignmentType;
 import com.antennasoftware.api.ui.Widget;
+import com.antennasoftware.api.ui.collections.ObjectArray;
 import com.antennasoftware.api.ui.component.Cell;
 import com.antennasoftware.api.ui.control.Button;
 import com.antennasoftware.api.ui.control.Control;
 import com.antennasoftware.api.ui.control.Label;
-import com.antennasoftware.api.ui.control.RichLabel;
 import com.antennasoftware.api.ui.control.Separator;
 import com.antennasoftware.api.ui.panel.TablePanel;
 import com.antennasoftware.api.ui.panel.TableViewCell;
@@ -44,7 +43,11 @@ public class OverviewBusDescTableViewCell extends TableViewCell implements
 	private Button expandButton;
 	private boolean isExpand;
 	
-	public OnSizeChangeListener onSizeChangeListener;
+	private int incorporatedHeight;
+	private int headquartersHeight;
+	private int industryHeight;
+	
+	private ObjectArray onSizeChangeListeners;
 
 	public OverviewBusDescTableViewCell() {
 		this.addListener(this);
@@ -70,6 +73,8 @@ public class OverviewBusDescTableViewCell extends TableViewCell implements
 		// TODO Auto-generated method stub
 		application = (IqltempApplication)getApplication();
 		style = application.getStyle();
+		
+		onSizeChangeListeners = new ObjectArray();
 		
 		setBackColor(Color.create(245, 245, 245));
 		setRowHeight(0, Sizing.PIXELS, 49);
@@ -168,11 +173,8 @@ public class OverviewBusDescTableViewCell extends TableViewCell implements
 			incorporatedLabel.setText("1999");
 			incorporatedLabel.setFont(valueFont);
 			incorporatedLabel.setHorizontalAlignment(HorizontalAlignmentType.RIGHT);
-			
-			int fontHeight = (valueFont.getSize() + 2) * 2;
-			int wrappedTextHeight = valueFont.getWrappedTextHeight(incorporatedLabel.getText(), 168);
-			int height = wrappedTextHeight > fontHeight ? fontHeight : wrappedTextHeight;
-			rightTablePanel.setRowHeight(0, Sizing.PIXELS, height);
+			incorporatedHeight = Utilities.getLabelHeight(incorporatedLabel, 2, 168);
+			rightTablePanel.setRowHeight(0, Sizing.PIXELS, incorporatedHeight);
 			
 			rightTablePanel.add(incorporatedLabel, "hfill=fill, vfill=fill");
 			rightTablePanel.startNewRow();
@@ -183,15 +185,11 @@ public class OverviewBusDescTableViewCell extends TableViewCell implements
 			rightTablePanel.add(titleLabel,"hfill=fill, vfill=fill");
 			
 			headquartersLabel = new Label();
-			headquartersLabel.setText("111 Street, New York USA, 111 Street, New York USA, 111 Street, New York USA, 111 Street, New York USA");
+			headquartersLabel.setText("111 Street, New York USA");
 			headquartersLabel.setFont(valueFont);
-			headquartersLabel.setBackColor(Colors.Aquamarine);
 			headquartersLabel.setHorizontalAlignment(HorizontalAlignmentType.RIGHT);
-			
-			fontHeight = (valueFont.getSize() + 2) * 3;
-			wrappedTextHeight = valueFont.getWrappedTextHeight(headquartersLabel.getText(), 168) + 2;
-			height = wrappedTextHeight > fontHeight ? fontHeight : wrappedTextHeight;
-			rightTablePanel.setRowHeight(1, Sizing.PIXELS, height);
+			headquartersHeight = Utilities.getLabelHeight(headquartersLabel, 3, 168);
+			rightTablePanel.setRowHeight(1, Sizing.PIXELS, headquartersHeight);
 			
 			rightTablePanel.add(headquartersLabel, "hfill=fill, vfill=fill");
 			rightTablePanel.startNewRow();
@@ -205,11 +203,8 @@ public class OverviewBusDescTableViewCell extends TableViewCell implements
 			industryLabel.setText("Computer Hardware");
 			industryLabel.setFont(valueFont);
 			industryLabel.setHorizontalAlignment(HorizontalAlignmentType.RIGHT);
-			
-			fontHeight = (valueFont.getSize() + 2) * 2;
-			wrappedTextHeight = valueFont.getWrappedTextHeight(industryLabel.getText(), 168);
-			height = wrappedTextHeight > fontHeight ? fontHeight : wrappedTextHeight;
-			rightTablePanel.setRowHeight(2, Sizing.PIXELS, height);
+			industryHeight = Utilities.getLabelHeight(industryLabel, 2, 168);
+			rightTablePanel.setRowHeight(2, Sizing.PIXELS, industryHeight);
 			
 			rightTablePanel.add(industryLabel, "hfill=fill, vfill=fill");
 			rightTablePanel.startNewRow();
@@ -229,8 +224,9 @@ public class OverviewBusDescTableViewCell extends TableViewCell implements
 		
 		descrptionLabel = new Label();
 		descrptionLabel.setText("Apple Inc., together with subsidiaries, designs, manufactures, and markets mobile communication and media devices, personal computing products, and portable digital music players worldwide. Apple Inc., together with subsidiaries, designs, manufactures, and markets mobile communication and media devices, personal computing products, and portable digital music players worldwide. Apple Inc., together with subsidiaries, designs, manufactures, and markets mobile communication and media devices, personal computing products, and portable digital music players worldwide. Apple Inc., together with subsidiaries, designs, manufactures, and markets mobile communication and media devices, personal computing products, and portable digital music players worldwide. Apple Inc., together with subsidiaries, designs, manufactures, and markets mobile communication and media devices, personal computing products, and portable digital music players worldwide. ");
-//		descrptionLabel.setVisible(isExpand);
+		descrptionLabel.setFont(style.getFont(12));
 		add(descrptionLabel,"hfill=fill, vfill=fill, colspan=4");
+//		application.log(this.toString(), "onCreate", descrptionLabel.getText());
 	}
 
 	public void onDeactivate(Container source) {
@@ -286,12 +282,13 @@ public class OverviewBusDescTableViewCell extends TableViewCell implements
 
 	public void onClick(Control c) {
 		// TODO Auto-generated method stub
+		application.log("OverviewBusDescTableViewCell", "onClick", c + " " + onSizeChangeListeners.size());
 		if( c.equals(this.expandButton) ){
 			isExpand = !isExpand;
-			if( onSizeChangeListener != null ){
+			for( int i = 0; i < onSizeChangeListeners.size(); i++ ){
+				OnSizeChangeListener onSizeChangeListener = (OnSizeChangeListener)onSizeChangeListeners.getItem(i);
 				onSizeChangeListener.onSizeChange(this);
 			}
-//			descrptionLabel.setVisible(isExpand);
 		}
 	}
 
@@ -304,5 +301,23 @@ public class OverviewBusDescTableViewCell extends TableViewCell implements
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	public void addOnSizeChangeListener(OnSizeChangeListener onSizeChangeListener){
+		Utilities.addObject(onSizeChangeListeners, onSizeChangeListener);
+	}
+	
+	public void removeOnSizeChangeListener(OnSizeChangeListener onSizeChangeListener){
+		Utilities.removeObject(onSizeChangeListeners, onSizeChangeListener);
+	}
+	
+	public int getHeight(){
+		int height = 49 + 1 + 16 + 16;
+		height += incorporatedHeight + headquartersHeight + industryHeight;
+		application.log(this.toString(), "getHeight", "descrptionLabel: " + descrptionLabel + " text: " + descrptionLabel.getText());
+		application.log(this.toString(), "getHeight", "websiteLabel: " + websiteLabel + " text: " + websiteLabel.getText());
+		if( isExpand ){
+			height += Utilities.getLabelHeight(descrptionLabel, 0, 599);
+		}
+		return height;
+	}
 }
