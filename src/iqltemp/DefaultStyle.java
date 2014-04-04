@@ -33,7 +33,7 @@ public class DefaultStyle extends Style implements ContainerStyleListener {
 	}
 	
 	public Font getFont(int fontSize, boolean isBold){
-		String fontFamily = getFont().getFamily();
+		String fontFamily = "Arial";
 		String key = fontFamily + ":" + fontSize + ":" + (isBold ? "Bold" : "Normal");
 		Font font = (Font)fonts.getValue(key);
 		if( font == null ){

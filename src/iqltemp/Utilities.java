@@ -4,7 +4,6 @@ import com.antennasoftware.api.ui.Device;
 import com.antennasoftware.api.ui.Font;
 import com.antennasoftware.api.ui.collections.ObjectArray;
 import com.antennasoftware.api.ui.control.Label;
-import com.antennasoftware.core.foundation.datamanager.IntInsertableData;
 
 final public class Utilities {
 	final public static int SCREEN_ORIENTATION_PORTRAIT = 0;
@@ -57,7 +56,7 @@ final public class Utilities {
 	public static int getLabelHeight(Label label, int maxNumberOfLines, int maxWidth){
 		Font font = label.getFont();
 		int height = 0;
-		int wrappedTextHeight = font.getWrappedTextHeight(label.getText(), 168);
+		int wrappedTextHeight = font.getWrappedTextHeight(label.getText(), maxWidth) + 2;
 		if( maxNumberOfLines == 0 ){
 			height = wrappedTextHeight;
 		}else{
