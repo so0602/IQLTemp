@@ -1,7 +1,6 @@
 package iqltemp;
 
 import com.antennasoftware.api.ui.Color;
-import com.antennasoftware.api.ui.Colors;
 import com.antennasoftware.api.ui.Container;
 import com.antennasoftware.api.ui.Sizing;
 import com.antennasoftware.api.ui.TableViewCellListener;
@@ -16,7 +15,9 @@ import com.antennasoftware.api.ui.styles.StyleReceptor;
 
 public class MenuTableViewCell extends TableViewCell implements
 		TableViewCellListener {
-
+	private IqltempApplication application;
+	private DefaultStyle style;
+	
 	private TablePanel mainPanel;
 	private Label titleLabel;
 	
@@ -42,11 +43,15 @@ public class MenuTableViewCell extends TableViewCell implements
 
 	public void onCreate(Container source) {
 		// TODO Auto-generated method stub
+		application = (IqltempApplication)getApplication();
+		style = application.getStyle();		
+		
 		setRowHeight(0, Sizing.PREFERRED, 1);
 		setColumnWidth(0, Sizing.PREFERRED, 1);
 		
 		titleLabel = new Label();
 		titleLabel.setForeColor(Color.create(203, 203, 203));
+		titleLabel.setFont(style.getBoldFont(14));
 		
 		mainPanel = new TablePanel();
 		mainPanel.setBackColor(Color.create(68, 68, 68));	
@@ -120,8 +125,13 @@ public class MenuTableViewCell extends TableViewCell implements
 		super.destroy();
 	}
 	
-	public void populateData(String title){
+	public void populateData(String title, boolean selected){
 		titleLabel.setText(title);
+		if (selected)
+			titleLabel.setForeColor(Color.create(37, 176, 208));
+		else 
+			titleLabel.setForeColor(Color.create(203, 203, 203));
+			
 	}	
 
 }

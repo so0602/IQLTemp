@@ -1,8 +1,5 @@
 package iqltemp;
 
-import iqltemp.transactions.TransactionsListTableHeader;
-import iqltemp.transactions.TransactionsListTableViewCell;
-
 import com.antennasoftware.api.ui.AbsoluteSize;
 import com.antennasoftware.api.ui.Color;
 import com.antennasoftware.api.ui.Colors;
@@ -15,14 +12,10 @@ import com.antennasoftware.api.ui.collections.ObjectArray;
 import com.antennasoftware.api.ui.component.Cell;
 import com.antennasoftware.api.ui.component.Footer;
 import com.antennasoftware.api.ui.component.Header;
-import com.antennasoftware.api.ui.component.TableItem;
-import com.antennasoftware.api.ui.control.Button;
 import com.antennasoftware.api.ui.control.CellConfig;
 import com.antennasoftware.api.ui.control.CellType;
 import com.antennasoftware.api.ui.control.Control;
-import com.antennasoftware.api.ui.control.Label;
 import com.antennasoftware.api.ui.control.StickyTable;
-import com.antennasoftware.api.ui.control.Table;
 import com.antennasoftware.api.ui.control.TableView;
 import com.antennasoftware.api.ui.control.TableViewActionListener;
 import com.antennasoftware.api.ui.control.TableViewCellCreateInfo;
@@ -31,15 +24,23 @@ import com.antennasoftware.api.ui.panel.TablePanel;
 import com.antennasoftware.api.ui.panel.TableViewCell;
 import com.antennasoftware.api.ui.panel.TableViewPanel;
 import com.antennasoftware.api.ui.styles.StyleReceptor;
-import com.antennasoftware.core.ui.control.ControlActionListener;
-import com.antennasoftware.core.ui.control.TableControlActionListener;
 
-public class MenuPanel extends TablePanel implements ContainerListener, ControlActionListener, TableViewActionListener {
-	public Button overviewButton;
-	public Button transactionsButton;
+public class MenuPanel extends TablePanel implements ContainerListener, TableViewActionListener {	
 	
 	private StickyTable stkTable;
 	private ObjectArray dataSources;	
+	private int selectedRow;
+	
+	public static final int COMPANY_MENU_OVERVIEW = 0;
+	public static final int COMPANY_MENU_OWNERSHIP = 1;
+	public static final int COMPANY_MENU_PROFESSIONALS = 2;
+	public static final int COMPANY_MENU_DEVELOPMENTS = 3;
+	public static final int COMPANY_MENU_NEWS = 4;
+	public static final int COMPANY_MENU_QUICKCOMPS = 5;
+	public static final int COMPANY_MENU_TRANSACTIONS = 6;
+	public static final int COMPANY_MENU_RESEARCH = 7;
+	public static final int COMPANY_MENU_FILINGS = 8;
+	public static final int COMPANY_MENU_TRANSCRIPTS = 9;	
 	
 	public int orientation;
 	
@@ -68,7 +69,7 @@ public class MenuPanel extends TablePanel implements ContainerListener, ControlA
 
 	public void onCreate(Container source) {
 		// TODO Auto-generated method stub
-
+		
 		dataSources = new ObjectArray();
 		dataSources.add("Overview");
 		dataSources.add("Ownership");
@@ -84,18 +85,6 @@ public class MenuPanel extends TablePanel implements ContainerListener, ControlA
 		setBackColor(Colors.DarkGray);
 		setColumnWidth(0, Sizing.PIXELS, 143);
 		
-//		overviewButton = new Button();
-//		overviewButton.setText("Overview");
-//		overviewButton.addListener(this);
-//		add(overviewButton, "hfill=fill, vfill=fill");
-//		startNewRow();
-//		
-//		transactionsButton = new Button();
-//		transactionsButton.setText("Transactions");
-//		transactionsButton.addListener(this);
-//		add(transactionsButton, "hfill=fill, vfill=fill");
-//		startNewRow();
-		
 		stkTable = new StickyTable();
 		stkTable.setBackColor(Color.create(68, 68, 68));
 		stkTable.setGridLineStyle(LineStyle.NONE);
@@ -105,7 +94,7 @@ public class MenuPanel extends TablePanel implements ContainerListener, ControlA
 		
 		add(stkTable, "hfill=fill, vfill=fill");
 
-		stkTable.refresh();
+		//stkTable.refresh();
 	}
 
 	public void onDeactivate(Container source) {
@@ -135,24 +124,6 @@ public class MenuPanel extends TablePanel implements ContainerListener, ControlA
 		}
 	}
 
-	public void onClick(Control c) {
-		// TODO Auto-generated method stub
-		if( c.equals(this.overviewButton) ){
-			screen.contentPanel.switchPanel(ContentPanel.CONTENTPANELTYPE_OVERVIEW);
-		}else if( c.equals(this.transactionsButton) ){
-			screen.contentPanel.switchPanel(ContentPanel.CONTENTPANELTYPE_TRANSACTIONS);
-		}
-	}
-
-	public void onFocusGained(Control c) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void onFocusLost(Control c) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	public void onAccessory(TableView c, int group, int row) {
 		// TODO Auto-generated method stub
@@ -177,7 +148,8 @@ public class MenuPanel extends TablePanel implements ContainerListener, ControlA
 			int group, int row) {
 		// TODO Auto-generated method stub
 		MenuTableViewCell tableViewCell = (MenuTableViewCell) cell;
-		tableViewCell.populateData((String)dataSources.getItem(row));
+		tableViewCell.populateData((String)dataSources.getItem(row),(row==selectedRow));
+			
 		tableViewCell.refresh();
 	}	
 
@@ -185,7 +157,6 @@ public class MenuPanel extends TablePanel implements ContainerListener, ControlA
 			int row) {
 		// TODO Auto-generated method stub
 		sizeInfo.setHeight(48);
-		//sizeInfo.setSize(1000, 67);
 	}
 
 	public void onCellType(TableView c, CellType type, int group, int row) {
@@ -268,27 +239,34 @@ public class MenuPanel extends TablePanel implements ContainerListener, ControlA
 	}
 
 	public void onSelection(int group, int row){
-		//selectedRow=row;
-		//stkTable.refresh();
-
+		selectedRow=row;
+		stkTable.refresh();
 		
-		if( row==0 ){
+		switch (row) {
+		case COMPANY_MENU_OVERVIEW:
 			screen.contentPanel.switchPanel(ContentPanel.CONTENTPANELTYPE_OVERVIEW);
-		}else if( row==6 ){
+			break;
+		case COMPANY_MENU_TRANSACTIONS:
 			screen.contentPanel.switchPanel(ContentPanel.CONTENTPANELTYPE_TRANSACTIONS);
+			break;			
+		default:
+			break;
 		}
+	}
+
+	public void onClick(Control c) {
+		// TODO Auto-generated method stub
 		
-//		if( row == transactionsData.length() ) {
-//			//Map compArg = (Map)getArgumentForScreen( SCREEN_NAME);
-//			//long companyId = Platform.parseLong(compArg.getValue("id"));
-//			appLog.log(Log.FINE, "New transaction list count: " + (row + 20));
-//			cacheManager.getTransactionListForListsVRPC(sessionID,nListId,"WatchList",row+20,30,true,null);
-//	
-//		}
-//		else {
-//			CompanyIntelligence.Transactions.TransactionItem transaction = (CompanyIntelligence.Transactions.TransactionItem)transactionsData.getItem(row);
-//			pushNewScreen("scrTransactionDetail",transaction);
-//		}
+	}
+
+	public void onFocusGained(Control c) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void onFocusLost(Control c) {
+		// TODO Auto-generated method stub
+		
 	}	
 
 
