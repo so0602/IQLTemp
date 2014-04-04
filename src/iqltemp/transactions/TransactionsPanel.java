@@ -431,8 +431,7 @@ public class TransactionsPanel extends TablePanel implements ContainerListener, 
 	}
 
 	public void onSelectionChanged(TableView c, int group, int row) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
 	
 	public boolean addOnSelectedListener(OnSelectedListener onSelectedListener){

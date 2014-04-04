@@ -4,7 +4,6 @@ import iqltemp.listeners.OnDimissScreenListener;
 import iqltemp.listeners.OnSelectedListener;
 import iqltemp.transactions.TransactionDetailPanel;
 
-import com.antennasoftware.api.platform.Boolean;
 import com.antennasoftware.api.ui.Background;
 import com.antennasoftware.api.ui.Color;
 import com.antennasoftware.api.ui.Colors;
@@ -28,6 +27,7 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 		
 	private NavigationPanel navigationPanel;
 	private Button addToWatchlistButton = new Button();
+	private Button backButton = new Button();
 	private CompanyPanel comapnyPanel;
 	private MenuPanel menuPanel;
 	public ContentPanel contentPanel;
@@ -74,10 +74,13 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 		
 		navigationPanel = new NavigationPanel();
 		navigationPanel.setTitle("APPLE INC.L TRANSACTIONS");
+				
+		backButton.addListener(this);
+		backButton.setText("< INDUSTRIES");		
+		navigationPanel.addLeftButton(backButton);
 		
 		addToWatchlistButton.addListener(this);
-		addToWatchlistButton.setText("Add To Watchlist");
-		
+		addToWatchlistButton.setText("Add To Watchlist >");		
 		navigationPanel.addRightButton(addToWatchlistButton);
 		mainPanel.add(navigationPanel, "hfill=fill, colspan=2");
 				

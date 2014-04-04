@@ -11,7 +11,6 @@ import com.antennasoftware.api.ui.collections.ObjectArray;
 import com.antennasoftware.api.ui.control.Button;
 import com.antennasoftware.api.ui.control.Label;
 import com.antennasoftware.api.ui.control.Separator;
-import com.antennasoftware.api.ui.panel.Panel;
 import com.antennasoftware.api.ui.panel.TablePanel;
 import com.antennasoftware.api.ui.styles.StyleReceptor;
 
@@ -25,7 +24,7 @@ public class NavigationPanel extends TablePanel implements ContainerListener {
 	
 	public String title;
 	
-	private int navigationStyle;
+	//private int navigationStyle;
 	public static final int NAVIGATION_STYLE_DEBUG = -1;
 	public static final int NAVIGATION_STYLE_BLACK = 0; //Default
 	public static final int NAVIGATION_STYLE_WHITE = 1;
@@ -54,37 +53,30 @@ public class NavigationPanel extends TablePanel implements ContainerListener {
 	public void onCreate(Container source) {
 		// TODO Auto-generated method stub
 		
-		setBackColor(Colors.Red);
-		setRowHeight(0, Sizing.PIXELS, 43);
-		setRowHeight(1, Sizing.PIXELS, 1);
-		setColumnWidth(0, Sizing.PREFERRED, 0);
-		setColumnWidth(1, Sizing.PERCENTS, 20);
-		setColumnWidth(2, Sizing.PERCENTS, 60);
-		setColumnWidth(3, Sizing.PERCENTS, 20);
-		setColumnWidth(4, Sizing.PREFERRED, 0);
-		
-		add(new Separator()); // Column 0
+		setBackColor(Colors.Black);
+		setRowHeight(0, Sizing.PIXELS, 44);
+		setColumnWidth(0, Sizing.PERCENTS, 25);
+		setColumnWidth(1, Sizing.PERCENTS, 50);
+		setColumnWidth(2, Sizing.PERCENTS, 25);
 		
 		leftButtonPanel = new TablePanel();
-		add(leftButtonPanel, "hfill=fill, vfill=fill, halign=center"); // Column 1
+		leftButtonPanel.setColumnWidth(0, Sizing.PIXELS, 12);
+		leftButtonPanel.setColumnWidth(1, Sizing.PREFERRED, 1);		
+		leftButtonPanel.setRowHeight(0, Sizing.PREFERRED, 1);	
+		add(leftButtonPanel, "hfill=fill, vfill=fill"); // Column 0
 		
 		titleLabel = new Label();
 		titleLabel.setText(title);
 		titleLabel.setHorizontalAlignment(HorizontalAlignmentType.CENTER);
-		add(titleLabel,"hfill=fill,halign=center");  // Column 2
+		add(titleLabel,"hfill=fill,halign=center");  // Column 1
 		
 		rightButtonPanel = new TablePanel();
-		add(rightButtonPanel, "hfill=fill, vfill=fill, halign=center"); // Column 3
+		rightButtonPanel.setColumnWidth(0, Sizing.PREFERRED, 1);		
+		rightButtonPanel.setColumnWidth(1, Sizing.PIXELS, 12);												
+		rightButtonPanel.setRowHeight(0, Sizing.PREFERRED, 1);
+		add(rightButtonPanel, "hfill=fill, vfill=fill"); // Column 2		
 		
-		add(new Separator());  // Column 4
-		
-		startNewRow();
-		
-		Separator separator = new Separator();
-		separator.setBackColor(Color.create(197, 197, 197));
-		add(separator, "hfill=fill, vfill=fill, colspan=5");
-		
-		setNavigationStyle(NAVIGATION_STYLE_DEBUG);
+		setNavigationStyle(NAVIGATION_STYLE_BLACK);
 	}
 
 	public void onDeactivate(Container source) {
@@ -113,28 +105,29 @@ public class NavigationPanel extends TablePanel implements ContainerListener {
 	public void addLeftButton(Button button){
 		if( leftButtons == null ){
 			leftButtons = new ObjectArray();
-		}
+		}		
 		leftButtons.add(button);
-		
-		leftButtonPanel.add(button,"halign=center");
+		leftButtonPanel.add(new Separator());		
+		leftButtonPanel.add(button,"halign=left, valign=center");
 	}
 	
 	public void addRightButton(Button button){
 		if( rightButtons == null ){
 			rightButtons = new ObjectArray();
 		}
-		rightButtons.add(button);
-		
-		rightButtonPanel.add(button,"halign=center");
+		rightButtons.add(button);			
+		rightButtonPanel.add(button,"halign=right, valign=center");
+		rightButtonPanel.add(new Separator());		
 	}
 	
+	
 	public void setNavigationStyle(int navigationStyle){
-		this.navigationStyle = navigationStyle;
+		//this.navigationStyle = navigationStyle;
 		switch( navigationStyle ){
 		case NAVIGATION_STYLE_DEBUG:
 			titleLabel.setBackColor(Colors.Red);
 			leftButtonPanel.setBackColor(Colors.LightBlue);
-			rightButtonPanel.setBackColor(Colors.LightBlue);
+			rightButtonPanel.setBackColor(Colors.Blue);
 			break;
 		case NAVIGATION_STYLE_BLACK:
 			setBackColor(Colors.Black);
