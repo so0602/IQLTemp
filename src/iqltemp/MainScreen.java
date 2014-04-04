@@ -5,10 +5,12 @@ import iqltemp.listeners.OnSelectedListener;
 import iqltemp.transactions.TransactionDetailPanel;
 
 import com.antennasoftware.api.ui.Background;
+import com.antennasoftware.api.ui.Border;
 import com.antennasoftware.api.ui.Color;
 import com.antennasoftware.api.ui.Colors;
 import com.antennasoftware.api.ui.Container;
 import com.antennasoftware.api.ui.InputEvent;
+import com.antennasoftware.api.ui.LineStyle;
 import com.antennasoftware.api.ui.Screen;
 import com.antennasoftware.api.ui.ScreenListener;
 import com.antennasoftware.api.ui.Sizing;
@@ -74,11 +76,15 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 		
 		navigationPanel = new NavigationPanel();
 		navigationPanel.setTitle("APPLE INC.L TRANSACTIONS");
-				
+		
+		backButton.setBackColor(Colors.Transparent);
+		backButton.setBorderColor(Colors.Transparent);
 		backButton.addListener(this);
 		backButton.setText("< INDUSTRIES");		
 		navigationPanel.addLeftButton(backButton);
 		
+		addToWatchlistButton.setBackColor(Colors.Transparent);
+		addToWatchlistButton.setBorder(Border.createSimpleBorder(LineStyle.NONE));
 		addToWatchlistButton.addListener(this);
 		addToWatchlistButton.setText("Add To Watchlist >");		
 		navigationPanel.addRightButton(addToWatchlistButton);
