@@ -4,7 +4,6 @@ import iqltemp.DefaultStyle;
 import iqltemp.IqltempApplication;
 import iqltemp.listeners.OnSizeChangeListener;
 
-import com.antennasoftware.api.application.Application;
 import com.antennasoftware.api.ui.AbsoluteSize;
 import com.antennasoftware.api.ui.Container;
 import com.antennasoftware.api.ui.ContainerListener;
@@ -35,6 +34,8 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 	private StickyTable mainTable;
 	
 	private OverviewBusDescTableViewCell busDescTableViewCell;
+	private int busDescTableViewCellHeight = 0;
+	private boolean busDescTableViewCellIsExpand = false;
 
 	public static final int OVERVIEW_GAPWIDTH = 13;
 	
@@ -159,6 +160,7 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 			boolean needReload = busDescTableViewCell == null;
 			busDescTableViewCell = (OverviewBusDescTableViewCell)cell;
 			busDescTableViewCell.addOnSizeChangeListener(this);
+			busDescTableViewCell.isExpand = busDescTableViewCellIsExpand;
 			if( needReload ){
 				c.reload(group, row);
 			}
@@ -170,7 +172,7 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 		// TODO Auto-generated method stub
 		switch( row ){
 		case 0:
-			sizeInfo.setSize(1024, busDescTableViewCell.getHeight());
+			sizeInfo.setSize(1024, busDescTableViewCellHeight != 0 ? busDescTableViewCellHeight : busDescTableViewCell.getHeight());
 			break;
 		default:
 			sizeInfo.setSize(1024, 0);
@@ -259,6 +261,10 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 
 	public void onSizeChange(TableViewCell cell) {
 		// TODO Auto-generated method stub
+		if( cell.equals(busDescTableViewCell) ){
+			busDescTableViewCellHeight = busDescTableViewCell.getHeight();
+			busDescTableViewCellIsExpand = busDescTableViewCell.isExpand;
+		}
 		mainTable.layout();
 	}
 }
