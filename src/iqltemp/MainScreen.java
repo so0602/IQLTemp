@@ -106,7 +106,6 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 		
 		mainPanel.startNewRow();
 		
-		
 		//add(mainPanel, "hfill=fill, vfill=fill");		
 		basePanel.add(hiddenLeftPanel, "vfill=fill");
 		basePanel.add(mainPanel, "vfill=fill");
@@ -116,6 +115,8 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 		basePanel.setColumnWidth(2, Sizing.PIXELS, 243);
 			
 		add(basePanel, "hfill=fill, vfill=fill");
+		
+				
 		
 	}
 
