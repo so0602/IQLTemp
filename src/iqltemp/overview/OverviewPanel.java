@@ -3,6 +3,7 @@ package iqltemp.overview;
 import iqltemp.DefaultStyle;
 import iqltemp.IqltempApplication;
 import iqltemp.listeners.OnSizeChangeListener;
+import iqltemp.models.OverviewBusDesc;
 
 import com.antennasoftware.api.ui.AbsoluteSize;
 import com.antennasoftware.api.ui.Container;
@@ -27,7 +28,7 @@ import com.antennasoftware.api.ui.styles.StyleReceptor;
 
 public class OverviewPanel extends TablePanel implements ContainerListener, TableViewActionListener, OnSizeChangeListener {
 	private IqltempApplication application;
-	private DefaultStyle style;
+//	private DefaultStyle style;
 	
 	public int orientation;
 
@@ -62,8 +63,8 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 
 	public void onCreate(Container source) {
 		// TODO Auto-generated method stub
-		application = (IqltempApplication)getApplication();
-		style = application.getStyle();
+		this.application = (IqltempApplication)getApplication();
+//		this.style = application.getStyle();
 		
 		mainTable = new StickyTable();
 		mainTable.addListener(this);
@@ -91,25 +92,8 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 
 	public void setOrientation(int orientation){
 		this.orientation = orientation;
-//		switch( orientation ){
-//		case Utilities.SCREEN_ORIENTATION_PORTRAIT:
-//			listTitlePanel.setColumnWidth(0, Sizing.PIXELS, LIST_HEADER_PANEL_PORTRAIT_START_SEPARATOR_WIDTH);
-//			listTitlePanel.setColumnWidth(1, Sizing.PIXELS, LIST_HEADER_PANEL_PORTRAIT_DATE_WIDTH);
-//			listTitlePanel.setColumnWidth(2, Sizing.PIXELS, LIST_HEADER_PANEL_PORTRAIT_TYPE_WIDTH);
-//			listTitlePanel.setColumnWidth(3, Sizing.PIXELS, LIST_HEADER_PANEL_PORTRAIT_BUYERS_WIDTH);
-//			listTitlePanel.setColumnWidth(4, Sizing.PIXELS, LIST_HEADER_PANEL_PORTRAIT_SECURITIES_WIDTH);
-//			listTitlePanel.setColumnWidth(5, Sizing.PIXELS, LIST_HEADER_PANEL_PORTRAIT_END_SEPARATOR_WIDTH);
-//			break;
-//		case Utilities.SCREEN_ORIENTATION_LANDSCAPE:
-//			listTitlePanel.setColumnWidth(0, Sizing.PIXELS, LIST_HEADER_PANEL_LANDSCAPE_START_SEPARATOR_WIDTH);
-//			listTitlePanel.setColumnWidth(1, Sizing.PIXELS, LIST_HEADER_PANEL_LANDSCAPE_DATE_WIDTH);
-//			listTitlePanel.setColumnWidth(2, Sizing.PIXELS, LIST_HEADER_PANEL_LANDSCAPE_TYPE_WIDTH);
-//			listTitlePanel.setColumnWidth(3, Sizing.PIXELS, LIST_HEADER_PANEL_LANDSCAPE_BUYERS_WIDTH);
-//			listTitlePanel.setColumnWidth(4, Sizing.PIXELS, LIST_HEADER_PANEL_LANDSCAPE_SECURITIES_WIDTH);
-//			listTitlePanel.setColumnWidth(5, Sizing.PIXELS, LIST_HEADER_PANEL_LANDSCAPE_END_SEPARATOR_WIDTH);
-//			break;
-//		}
-//		listTable.refresh();
+		busDescTableViewCellHeight = 0;
+		mainTable.refresh();
 	}
 
 	public void onClick(Control c) {
@@ -160,8 +144,13 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 			boolean needReload = busDescTableViewCell == null;
 			busDescTableViewCell = (OverviewBusDescTableViewCell)cell;
 			busDescTableViewCell.addOnSizeChangeListener(this);
+			busDescTableViewCell.setOrientation(this.orientation);
+			busDescTableViewCell.populateData(new OverviewBusDesc().randomOverviewBusDesc());
 			busDescTableViewCell.isExpand = busDescTableViewCellIsExpand;
+			
 			if( needReload ){
+				c.reload(group, row);
+			}else if( busDescTableViewCell.getHeight() != busDescTableViewCellHeight ){
 				c.reload(group, row);
 			}
 		}
@@ -265,6 +254,6 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 			busDescTableViewCellHeight = busDescTableViewCell.getHeight();
 			busDescTableViewCellIsExpand = busDescTableViewCell.isExpand;
 		}
-		mainTable.layout();
+		mainTable.refresh();
 	}
 }

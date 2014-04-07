@@ -4,6 +4,7 @@ import iqltemp.DefaultStyle;
 import iqltemp.IqltempApplication;
 import iqltemp.Utilities;
 import iqltemp.listeners.OnSizeChangeListener;
+import iqltemp.models.OverviewBusDesc;
 
 import com.antennasoftware.api.ui.Color;
 import com.antennasoftware.api.ui.Colors;
@@ -27,6 +28,7 @@ import com.antennasoftware.core.ui.control.ControlActionListener;
 
 public class OverviewBusDescTableViewCell extends TableViewCell implements
 		TableViewCellListener, ControlActionListener {
+	private int orientation;
 	
 	private IqltempApplication application;
 	private DefaultStyle style;
@@ -44,10 +46,16 @@ public class OverviewBusDescTableViewCell extends TableViewCell implements
 	private Button expandButton;
 	public boolean isExpand;
 	
+	private TablePanel leftTablePanel;
+	private TablePanel rightTablePanel;
+	
 	private int incorporatedHeight;
 	private int headquartersHeight;
 	private int industryHeight;
 	private int descriptionHeight;
+	
+	private int valueMaxWidth;
+	private int descMaxWidth;
 	
 	private ObjectArray onSizeChangeListeners;
 
@@ -78,19 +86,17 @@ public class OverviewBusDescTableViewCell extends TableViewCell implements
 		
 		onSizeChangeListeners = new ObjectArray();
 		
+		leftTablePanel = new TablePanel();
+		rightTablePanel = new TablePanel();
+		
+		this.setOrientation(this.orientation);
+		
 		setBackColor(Color.create(245, 245, 245));
 		setRowHeight(0, Sizing.PIXELS, 49);
 		setRowHeight(1, Sizing.PIXELS, 1);
 		setRowHeight(2, Sizing.PIXELS, 16);
 		setRowHeight(4, Sizing.PIXELS, 16);
 		setRowHeight(6, Sizing.PIXELS, 16);
-		
-		setColumnWidth(0, Sizing.PIXELS, OverviewPanel.OVERVIEW_GAPWIDTH);
-		setColumnWidth(1, Sizing.PIXELS, 268);
-		setColumnWidth(2, Sizing.PIXELS, 35);
-		setColumnWidth(3, Sizing.PIXELS, 268);
-		setColumnWidth(4, Sizing.PIXELS, 28);
-		setColumnWidth(5, Sizing.PIXELS, OverviewPanel.OVERVIEW_GAPWIDTH);
 		
 		Separator separator = new Separator();
 		separator.setBackColor(Color.create(240, 240, 240));
@@ -116,11 +122,7 @@ public class OverviewBusDescTableViewCell extends TableViewCell implements
 		Font titleFont = style.getFont(13);
 		Font valueFont = style.getBoldFont(12);
 		
-		TablePanel leftTablePanel = new TablePanel();
 		{
-			leftTablePanel.setColumnWidth(0, Sizing.PIXELS, 100);
-			leftTablePanel.setColumnWidth(1, Sizing.PIXELS, 168);
-			
 			titleLabel = new Label();
 			titleLabel.setText("Website");
 			titleLabel.setFont(titleFont);
@@ -161,11 +163,7 @@ public class OverviewBusDescTableViewCell extends TableViewCell implements
 		
 		add(new Separator(), "hfill=fill, vfill=fill");
 		
-		TablePanel rightTablePanel = new TablePanel();
 		{
-			rightTablePanel.setColumnWidth(0, Sizing.PIXELS, 100);
-			rightTablePanel.setColumnWidth(1, Sizing.PIXELS, 168);
-			
 			titleLabel = new Label();
 			titleLabel.setText("Incorporated");
 			titleLabel.setFont(titleFont);
@@ -175,7 +173,7 @@ public class OverviewBusDescTableViewCell extends TableViewCell implements
 			incorporatedLabel.setText("1999");
 			incorporatedLabel.setFont(valueFont);
 			incorporatedLabel.setHorizontalAlignment(HorizontalAlignmentType.RIGHT);
-			incorporatedHeight = Utilities.getLabelHeight(incorporatedLabel, 2, 168);
+			incorporatedHeight = Utilities.getLabelHeight(incorporatedLabel, 2, valueMaxWidth);
 			rightTablePanel.setRowHeight(0, Sizing.PIXELS, incorporatedHeight);
 			
 			rightTablePanel.add(incorporatedLabel, "hfill=fill, vfill=fill");
@@ -190,7 +188,7 @@ public class OverviewBusDescTableViewCell extends TableViewCell implements
 			headquartersLabel.setText("111 Street, New York USA");
 			headquartersLabel.setFont(valueFont);
 			headquartersLabel.setHorizontalAlignment(HorizontalAlignmentType.RIGHT);
-			headquartersHeight = Utilities.getLabelHeight(headquartersLabel, 3, 168);
+			headquartersHeight = Utilities.getLabelHeight(headquartersLabel, 3, valueMaxWidth);
 			rightTablePanel.setRowHeight(1, Sizing.PIXELS, headquartersHeight);
 			
 			rightTablePanel.add(headquartersLabel, "hfill=fill, vfill=fill");
@@ -205,7 +203,7 @@ public class OverviewBusDescTableViewCell extends TableViewCell implements
 			industryLabel.setText("Computer Hardware");
 			industryLabel.setFont(valueFont);
 			industryLabel.setHorizontalAlignment(HorizontalAlignmentType.RIGHT);
-			industryHeight = Utilities.getLabelHeight(industryLabel, 2, 168);
+			industryHeight = Utilities.getLabelHeight(industryLabel, 2, valueMaxWidth);
 			rightTablePanel.setRowHeight(2, Sizing.PIXELS, industryHeight);
 			
 			rightTablePanel.add(industryLabel, "hfill=fill, vfill=fill");
@@ -228,10 +226,9 @@ public class OverviewBusDescTableViewCell extends TableViewCell implements
 		descrptionLabel.setText("Apple Inc., together with subsidiaries, designs, manufactures, and markets mobile communication and media devices, personal computing products, and portable digital music players worldwide. Its products and services include iPhone, a handheld product that combines a mobile phone, an iPod, and an Internet communications device; iPad, a multi-purpose mobile device; desktop computers, such as iMac, Mac Pro, and Mac mini; portable computers, including MacBook Pro and MacBook Air; a line of iPod portable digital music and media players; and iCloud, and a cloud service. The company also offers a range of software products, including iOS and OS X operating system software consisting of Final Cut Pro, Logic Stuio, Logic Pro, and its FileMaker Pro database software. It also manufactures the Apple LED Cinema Display and Thunderbolt Display; sells a variety of Apple-branded");
 		descrptionLabel.setFont(style.getFont(12));
 		descrptionLabel.setBackColor(Colors.Azure);
-		descriptionHeight = Utilities.getLabelHeight(descrptionLabel, 0, 599);
+		descriptionHeight = Utilities.getLabelHeight(descrptionLabel, 0, descMaxWidth);
 		add(descrptionLabel,"hfill=fill, vfill=fill, colspan=4");
 		setRowHeight(5, Sizing.PIXELS, descriptionHeight);
-		application.log(this.toString(), "onCreate", "descriptionHeight " + descriptionHeight);
 	}
 
 	public void onDeactivate(Container source) {
@@ -322,5 +319,64 @@ public class OverviewBusDescTableViewCell extends TableViewCell implements
 			height += descriptionHeight + 16;
 		}
 		return height;
+	}
+	
+	public void populateData(OverviewBusDesc overviewBusDesc){
+		websiteLabel.setText(overviewBusDesc.website);
+		subsidiariesLabel.setText(overviewBusDesc.subsidaries);
+		employeesLabel.setText(overviewBusDesc.employees);
+		incorporatedLabel.setText(overviewBusDesc.incorporated);
+		headquartersLabel.setText(overviewBusDesc.headquarters);
+		industryLabel.setText(overviewBusDesc.inductry);
+		descrptionLabel.setText(overviewBusDesc.description);
+		
+		incorporatedHeight = Utilities.getLabelHeight(incorporatedLabel, 2, valueMaxWidth);
+		headquartersHeight = Utilities.getLabelHeight(headquartersLabel, 3, valueMaxWidth);
+		industryHeight = Utilities.getLabelHeight(industryLabel, 2, valueMaxWidth);
+		
+		rightTablePanel.setRowHeight(0, Sizing.PIXELS, incorporatedHeight);
+		rightTablePanel.setRowHeight(1, Sizing.PIXELS, headquartersHeight);
+		rightTablePanel.setRowHeight(2, Sizing.PIXELS, industryHeight);
+		
+		descriptionHeight = Utilities.getLabelHeight(descrptionLabel, 0, descMaxWidth);
+		setRowHeight(5, Sizing.PIXELS, descriptionHeight);
+	}
+	
+	public void setOrientation(int orientation){
+		this.orientation = orientation;
+		switch( orientation ){
+		case Utilities.SCREEN_ORIENTATION_PORTRAIT:
+			setColumnWidth(0, Sizing.PIXELS, OverviewPanel.OVERVIEW_GAPWIDTH);
+			setColumnWidth(1, Sizing.PIXELS, 268);
+			setColumnWidth(2, Sizing.PIXELS, 35);
+			setColumnWidth(3, Sizing.PIXELS, 268);
+			setColumnWidth(4, Sizing.PIXELS, 28);
+			setColumnWidth(5, Sizing.PIXELS, OverviewPanel.OVERVIEW_GAPWIDTH);
+			
+			leftTablePanel.setColumnWidth(0, Sizing.PIXELS, 100);
+			leftTablePanel.setColumnWidth(1, Sizing.PIXELS, 168);
+			rightTablePanel.setColumnWidth(0, Sizing.PIXELS, 100);
+			rightTablePanel.setColumnWidth(1, Sizing.PIXELS, 168);
+			
+			valueMaxWidth = 168;
+			descMaxWidth = 599;
+			break;
+		case Utilities.SCREEN_ORIENTATION_LANDSCAPE:
+			setColumnWidth(0, Sizing.PIXELS, OverviewPanel.OVERVIEW_GAPWIDTH);
+			setColumnWidth(1, Sizing.PIXELS, 375);
+			setColumnWidth(2, Sizing.PIXELS, 35);
+			setColumnWidth(3, Sizing.PIXELS, 386);
+			setColumnWidth(4, Sizing.PIXELS, 35);
+			setColumnWidth(5, Sizing.PIXELS, OverviewPanel.OVERVIEW_GAPWIDTH);
+			
+			leftTablePanel.setColumnWidth(0, Sizing.PIXELS, 100);
+			leftTablePanel.setColumnWidth(1, Sizing.PIXELS, 275);
+			rightTablePanel.setColumnWidth(0, Sizing.PIXELS, 100);
+			rightTablePanel.setColumnWidth(1, Sizing.PIXELS, 286);
+			
+			valueMaxWidth = 286;
+			descMaxWidth = 831;
+			break;
+		}
 	}
 }
