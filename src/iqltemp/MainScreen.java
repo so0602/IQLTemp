@@ -36,7 +36,7 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 	private AddToWatchlistPanel addToWatchlistPanel = new AddToWatchlistPanel();
 	
 	private boolean toggle;
-	
+		
 	public int orientation;
 
 	public MainScreen() {
@@ -112,7 +112,7 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 		basePanel.add(addToWatchlistPanel, " vfill=fill");
 		basePanel.setColumnWidth(0, Sizing.PIXELS, 0);
 		basePanel.setColumnWidth(1, Sizing.PERCENTS, 100);
-		basePanel.setColumnWidth(2, Sizing.PIXELS, 243);
+		basePanel.setColumnWidth(2, Sizing.PIXELS, 333);
 			
 		add(basePanel, "hfill=fill, vfill=fill");
 		

@@ -38,6 +38,7 @@ public class IPAD extends ImageBundle {
       try {
          {
             new ImageResource(this, "AboutIcon", null);
+            new ImageResource(this, "ButtonBackground", null);
             new ImageResource(this, "Icon", null);
             new ImageResource(this, "OptionsIcon", null);
             new ImageResource(this, "RolloverIcon", null);
