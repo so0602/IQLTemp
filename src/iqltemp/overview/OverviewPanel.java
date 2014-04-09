@@ -2,6 +2,7 @@ package iqltemp.overview;
 
 import iqltemp.DefaultStyle;
 import iqltemp.IqltempApplication;
+import iqltemp.Utilities;
 import iqltemp.listeners.OnSizeChangeListener;
 import iqltemp.models.OverviewBusDesc;
 
@@ -40,6 +41,9 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 
 	public static final int OVERVIEW_GAPWIDTH = 13;
 	
+	public static final int OVERVIEW_FCBF_HEIGHT_PORTRAIT = 411; // FCBF = Fundamentals Chart and Basic Financials - Portrait
+	public static final int OVERVIEW_FCBF_HEIGHT_LANDSCAPE = 383; // FCBF = Fundamentals Chart and Basic Financials - Landscape
+	
 	public OverviewPanel() {
 		this.addListener(this);
 		// TODO Auto-generated constructor stub
@@ -69,7 +73,7 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 		mainTable = new StickyTable();
 		mainTable.addListener(this);
 		mainTable.setNumberOfGroups(1);
-		mainTable.setNumberOfCellsInGroup(0, 1);
+		mainTable.setNumberOfCellsInGroup(0, 2);
 		add(mainTable, "hfill=fill, vfill=fill");
 		startNewRow();
 	}
@@ -131,6 +135,10 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 		case 0:
 			cell = new OverviewBusDescTableViewCell();
 			break;
+		case 1:
+			cell = new OverviewFundChartBasicFinTableViewCell(this.orientation);
+			application.log(this.toString(), "onCellCreateInfo", "Create Row 1: " + this.orientation);
+			break;
 		}
 		info.setPanel(cell);
 		application.log(this.toString(), "onCellCreateInfo", cell.toString());
@@ -153,6 +161,8 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 			}else if( busDescTableViewCell.getHeight() != busDescTableViewCellHeight ){
 				c.reload(group, row);
 			}
+		}else if( cell instanceof OverviewFundChartBasicFinTableViewCell ){
+			((OverviewFundChartBasicFinTableViewCell)cell).populateData();
 		}
 	}
 
@@ -162,6 +172,9 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 		switch( row ){
 		case 0:
 			sizeInfo.setSize(1024, busDescTableViewCellHeight != 0 ? busDescTableViewCellHeight : busDescTableViewCell.getHeight());
+			break;
+		case 1:
+			sizeInfo.setSize(1024, this.orientation == Utilities.SCREEN_ORIENTATION_PORTRAIT ? OVERVIEW_FCBF_HEIGHT_PORTRAIT : OVERVIEW_FCBF_HEIGHT_LANDSCAPE);
 			break;
 		default:
 			sizeInfo.setSize(1024, 0);
