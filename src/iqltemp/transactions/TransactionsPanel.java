@@ -50,7 +50,6 @@ public class TransactionsPanel extends TablePanel implements ContainerListener, 
 	private TablePanel gridPanel;
 	
 	private ObjectArray dataSources;
-	
 	private ObjectArray onSelectedListeners;
 	
 	public static final int TITLE_PANEL_HEIGHT = 44;

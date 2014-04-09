@@ -2,6 +2,7 @@ package iqltemp;
 
 
 import iqltemp.gen.IQLTemp;
+
 import com.antennasoftware.api.ui.ApplicationListener;
 import com.antennasoftware.api.application.services.ErrorSourceListener;
 import com.antennasoftware.api.application.services.Log;
@@ -22,6 +23,8 @@ public class IqltempApplication extends IQLTemp implements ApplicationListener,
 	}
 
 	public void onApplicationStyleSetup(StyleReceptor _style) {
+		setImageBundle();
+		
 		style = new DefaultStyle();
 		_style.applyVisualStyle(style);
 	}
@@ -83,4 +86,10 @@ public class IqltempApplication extends IQLTemp implements ApplicationListener,
 	public DefaultStyle getStyle(){
 		return style;
 	}
+	
+	public void setImageBundle() {
+        Images.setDefault(Images.IPAD);
+      
+    }    
+		
 }

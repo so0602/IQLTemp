@@ -30,6 +30,13 @@
         <properties/>
         <properties/>
       </imagePaths>
+      <imagePaths name="ButtonBackground">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
       <imagePaths name="Icon">
         <properties/>
         <properties/>
@@ -112,6 +119,13 @@
       <properties xsi:type="com.vaultus.ecore.properties:BooleanProperty" name="ANDROID" true="true"/>
       <children xsi:type="com.vaultus.studio.ecore.studio:VScriptNode" name="ANDROID_L.mscript" hidden="true"/>
       <imagePaths name="AboutIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="ButtonBackground">
         <properties/>
         <properties/>
         <properties/>
@@ -206,6 +220,13 @@
         <properties/>
         <properties/>
       </imagePaths>
+      <imagePaths name="ButtonBackground">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
       <imagePaths name="Icon">
         <properties/>
         <properties/>
@@ -288,6 +309,13 @@
       <properties xsi:type="com.vaultus.ecore.properties:BooleanProperty" name="ANDROID" true="true"/>
       <children xsi:type="com.vaultus.studio.ecore.studio:VScriptNode" name="ANDROID_X.mscript" hidden="true"/>
       <imagePaths name="AboutIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="ButtonBackground">
         <properties/>
         <properties/>
         <properties/>
@@ -378,6 +406,9 @@
       <imagePaths name="AboutIcon">
         <properties/>
       </imagePaths>
+      <imagePaths name="ButtonBackground">
+        <properties/>
+      </imagePaths>
       <imagePaths name="Icon">
         <properties/>
       </imagePaths>
@@ -418,6 +449,9 @@
       <imagePaths name="AboutIcon">
         <properties/>
       </imagePaths>
+      <imagePaths name="ButtonBackground">
+        <properties/>
+      </imagePaths>
       <imagePaths name="Icon">
         <properties/>
       </imagePaths>
@@ -452,10 +486,17 @@
         <properties/>
       </imagePaths>
     </children>
-    <children xsi:type="com.vaultus.studio.ecore.studio:ImageSetNode" name="IPAD" required="true" default="true" type="IPAD">
+    <children xsi:type="com.vaultus.studio.ecore.studio:ImageSetNode" name="IPAD" required="true" default="true" type="IPAD" shown="true">
       <properties xsi:type="com.vaultus.ecore.properties:BooleanProperty" name="IPAD" true="true"/>
       <children xsi:type="com.vaultus.studio.ecore.studio:VScriptNode" name="IPAD.mscript" hidden="true"/>
       <imagePaths name="AboutIcon">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
+      <imagePaths name="ButtonBackground">
         <properties/>
         <properties/>
         <properties/>
@@ -551,6 +592,13 @@
         <properties/>
         <properties/>
       </imagePaths>
+      <imagePaths name="ButtonBackground">
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+        <properties/>
+      </imagePaths>
       <imagePaths name="Icon">
         <properties/>
         <properties/>
@@ -635,6 +683,9 @@
       <imagePaths name="AboutIcon">
         <properties/>
       </imagePaths>
+      <imagePaths name="ButtonBackground">
+        <properties/>
+      </imagePaths>
       <imagePaths name="Icon">
         <properties/>
       </imagePaths>
@@ -673,6 +724,9 @@
       <properties xsi:type="com.vaultus.ecore.properties:BooleanProperty" name="BLACKBERRY" true="true"/>
       <children xsi:type="com.vaultus.studio.ecore.studio:VScriptNode" name="STORM.mscript" hidden="true"/>
       <imagePaths name="AboutIcon">
+        <properties/>
+      </imagePaths>
+      <imagePaths name="ButtonBackground">
         <properties/>
       </imagePaths>
       <imagePaths name="Icon">
@@ -717,6 +771,9 @@
       <imagePaths name="AboutIcon">
         <properties/>
       </imagePaths>
+      <imagePaths name="ButtonBackground">
+        <properties/>
+      </imagePaths>
       <imagePaths name="Icon">
         <properties/>
       </imagePaths>
@@ -752,6 +809,7 @@
       </imagePaths>
     </children>
     <images name="AboutIcon"/>
+    <images name="ButtonBackground"/>
     <images name="Icon"/>
     <images name="OptionsIcon"/>
     <images name="RolloverIcon"/>

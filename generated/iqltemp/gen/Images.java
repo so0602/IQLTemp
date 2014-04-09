@@ -18,6 +18,8 @@ public class Images extends com.antennasoftware.api.bl.images.Images {
    
    public ImageReference AboutIcon;
    
+   public ImageReference ButtonBackground;
+   
    public ImageReference Icon;
    
    public ImageReference OptionsIcon;
@@ -74,6 +76,7 @@ public class Images extends com.antennasoftware.api.bl.images.Images {
    protected Images _Images() {
       try {
          this.AboutIcon = new ImageReference(this, "AboutIcon", null);
+         this.ButtonBackground = new ImageReference(this, "ButtonBackground", null);
          this.Icon = new ImageReference(this, "Icon", null);
          this.OptionsIcon = new ImageReference(this, "OptionsIcon", null);
          this.RolloverIcon = new ImageReference(this, "RolloverIcon", null);
