@@ -28,11 +28,12 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 	private ScrollableHorizontalPanel basePanel;
 	private TablePanel hiddenLeftPanel;
 	private TablePanel mainPanel;		
-	private NavigationPanel navigationPanel;
+	private NavigationPanel navigationPanel;	
 	private BackgroundButton addToWatchlistButton = new BackgroundButton();
 	private BackgroundButton backButton = new BackgroundButton();
 	private CompanyPanel comapnyPanel;
 	private MenuPanel menuPanel;
+	private TablePanel rightPanel = new TablePanel();	
 	private AddToWatchlistPanel addToWatchlistPanel = new AddToWatchlistPanel();
 	
 	public ContentPanel contentPanel;
@@ -63,12 +64,13 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 	}
 
 	public void onCreate(Container source) {
-		// TODO Auto-generated method stub		
+		// TODO Auto-generated method stub
+		setRowHeight(0, Sizing.PERCENTS, 100);
 		add(basePanel(), "hfill=fill, vfill=fill");
 				
 		basePanel.add(hiddenLeftPanel(), "vfill=fill");
-		basePanel.add(mainPanel(), "vfill=fill");
-		basePanel.add(addToWatchlistPanel, " vfill=fill");			
+		basePanel.add(mainPanel(), "vfill=fill");		
+		basePanel.add(rightPanel(), "vfill=fill");			
 	}
 
 	public void onDeactivate(Container source) {
@@ -147,6 +149,7 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 		this.menuPanel.setOrientation(_orientation);
 		this.contentPanel.setOrientation(_orientation);
 		this.comapnyPanel.setOrientation(_orientation);
+		toggle = false;
 	}
 
 	public void destroy() {
@@ -179,7 +182,9 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 		mainPanel = new TablePanel();
 		mainPanel.setColumnWidth(0, Sizing.PREFERRED, 0);
 		mainPanel.setColumnWidth(1, Sizing.PREFERRED, 1);
-		mainPanel.setRowHeight(2, Sizing.PERCENTS, 100);
+		mainPanel.setRowHeight(0, Sizing.PIXELS, 44);
+		mainPanel.setRowHeight(1, Sizing.PIXELS, 60);
+		mainPanel.setRowHeight(2, Sizing.PREFERRED, 1);
 		
 		mainPanel.add(navigationPanel(), "hfill=fill, colspan=2");				
 		mainPanel.startNewRow();
@@ -215,6 +220,14 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 		navigationPanel.addRightButton(addToWatchlistButton);
 		return navigationPanel;
 	}
+	
+	private Panel rightPanel() {
+		rightPanel = new TablePanel();
+		rightPanel.setRowHeight(0, Sizing.PERCENTS, 100);
+		rightPanel.setColumnWidth(0, Sizing.PIXELS, 333);
+		rightPanel.add(addToWatchlistPanel, "hfill=fill,vfill=fill");
+		return rightPanel;
+	}
 
 	//================================================================================
     // OnSelectedListener
@@ -248,10 +261,9 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 				//basePanel.refresh();
 				toggle = false;
 			} else {
-				basePanel.reveal(addToWatchlistPanel);
+				basePanel.reveal(rightPanel);
 				toggle = true;
-			}	
-			
+			}				
 		}
 	}
 
