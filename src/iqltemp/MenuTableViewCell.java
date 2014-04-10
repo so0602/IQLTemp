@@ -69,9 +69,6 @@ public class MenuTableViewCell extends TableViewCell implements
 		mainPanel.add(separator, "hfill=fill, vfill=fill, colspan=2");
 		
 		add(mainPanel, "hfill=fill, vfill=fill");
-		
-		
-		
 	}
 
 	public void onDeactivate(Container source) {
@@ -124,6 +121,10 @@ public class MenuTableViewCell extends TableViewCell implements
 		// TODO Auto-generated method stub
 		super.destroy();
 	}
+	
+	//================================================================================
+    // Public
+    //================================================================================
 	
 	public void populateData(String title, boolean selected){
 		titleLabel.setText(title);

@@ -1,9 +1,18 @@
-package iqltemp;
+package iqltemp.watchlist;
+
+import iqltemp.DefaultStyle;
+import iqltemp.IqltempApplication;
+import iqltemp.Reusable.UIControl.SegmentPanel;
+import iqltemp.listeners.OnSegmentSelectedListener;
 
 import com.antennasoftware.api.ui.AbsoluteSize;
+import com.antennasoftware.api.ui.Background;
 import com.antennasoftware.api.ui.Color;
+import com.antennasoftware.api.ui.Colors;
 import com.antennasoftware.api.ui.Container;
 import com.antennasoftware.api.ui.ContainerListener;
+import com.antennasoftware.api.ui.HorizontalAlignmentType;
+import com.antennasoftware.api.ui.LineStyle;
 import com.antennasoftware.api.ui.Sizing;
 import com.antennasoftware.api.ui.TextClearMode;
 import com.antennasoftware.api.ui.Widget;
@@ -11,6 +20,7 @@ import com.antennasoftware.api.ui.collections.ObjectArray;
 import com.antennasoftware.api.ui.component.Cell;
 import com.antennasoftware.api.ui.component.Footer;
 import com.antennasoftware.api.ui.component.Header;
+import com.antennasoftware.api.ui.control.BackgroundButton;
 import com.antennasoftware.api.ui.control.Button;
 import com.antennasoftware.api.ui.control.CellConfig;
 import com.antennasoftware.api.ui.control.CellType;
@@ -28,25 +38,32 @@ import com.antennasoftware.api.ui.panel.TablePanel;
 import com.antennasoftware.api.ui.panel.TableViewCell;
 import com.antennasoftware.api.ui.panel.TableViewPanel;
 import com.antennasoftware.api.ui.styles.StyleReceptor;
+import com.antennasoftware.core.foundation.data.datasource.ext.DataSource;
 import com.antennasoftware.core.ui.control.ControlActionListener;
 
 public class AddToWatchlistPanel extends TablePanel implements
 		ContainerListener, ControlActionListener, TableViewActionListener {
 
+	private IqltempApplication application = (IqltempApplication)getApplication();
+	private DefaultStyle style = application.getStyle();
+	
 	private TablePanel topPanel;
 	private TablePanel segmentPanel;
 	private StackPanel stacktPanel;	
 	private TextField textField;
-	private Button addButton;
-	private Button editButton;
-	private Button myWatchlistButton;
-	private Button sharedWatchlistButton;
+	private BackgroundButton addButton;
+	private BackgroundButton editButton;
+	private BackgroundButton myWatchlistButton;
+	private BackgroundButton sharedWatchlistButton;
 	private TablePanel myWatchlistPanel;
 	private StickyTable myWatchlistTable;
 	private TablePanel sharedWatchlistPanel;	
 	private StickyTable sharedWatchlistTable;
-	
-	private ObjectArray dataSources;
+
+	private ObjectArray segmentObjectArray = new ObjectArray();
+	private ObjectArray myWatchlistDataSources;
+	private ObjectArray sharedWatchlistDataSources;
+
 	
 	public AddToWatchlistPanel() {
 		this.addListener(this);
@@ -77,9 +94,11 @@ public class AddToWatchlistPanel extends TablePanel implements
 		setColumnWidth(0, Sizing.PIXELS, 12);
 		setColumnWidth(1, Sizing.PIXELS, 309);
 		setColumnWidth(2, Sizing.PIXELS, 12);
-		setRowHeight(0, Sizing.PIXELS, 44);
-		setRowHeight(1, Sizing.PIXELS, 40);
-		setRowHeight(2, Sizing.PREFERRED, 1);
+		setRowHeight(0, Sizing.PIXELS, 43);
+		setRowHeight(1, Sizing.PIXELS, 1);
+		setRowHeight(2, Sizing.PIXELS, 39);
+		setRowHeight(3, Sizing.PIXELS, 1);
+		setRowHeight(4, Sizing.PREFERRED, 1);
 	
 		// Column 1
 		add(new Separator(), "hfill=fill");					
@@ -87,13 +106,23 @@ public class AddToWatchlistPanel extends TablePanel implements
 		startNewRow();
 		
 		// Column 2
-		add(new Separator(), "hfill=fill");		
-		add(segmentPanel(), "hfill=fill,vfill=fill,colspan=2");
+		Separator separator = new Separator();
+		separator.setBackColor(Color.create(59, 59, 59));
+		add(separator, "hfill=fill,colspan=3");
 		startNewRow();
-	
-		// Column 3
-		add(stackPanel(), "hfill=fill,vfill=fill,colspan=3");		
-	
+		
+		// Column 3	
+		add(segmentPanel(), "hfill=fill,vfill=fill,colspan=3");
+		startNewRow();
+		
+		// Column 4
+		separator = new Separator();
+		separator.setBackColor(Color.create(59, 59, 59));
+		add(separator, "hfill=fill,colspan=3");
+		startNewRow();
+		
+		// Column 5
+		add(stackPanel(), "hfill=fill,vfill=fill,colspan=3");			
 	}
 
 	public void onDeactivate(Container source) {
@@ -118,41 +147,37 @@ public class AddToWatchlistPanel extends TablePanel implements
 	
 	private Panel topPanel() {
 		topPanel = new TablePanel();
-		topPanel.setRowHeight(0, Sizing.PIXELS, 44);
+		topPanel.setRowHeight(0, Sizing.PIXELS, 43);
 		topPanel.setColumnWidth(0, Sizing.PIXELS, 230);
 		topPanel.setColumnWidth(1, Sizing.PIXELS, 38);
-		topPanel.setColumnWidth(2, Sizing.PREFERRED, 1);
+		topPanel.setColumnWidth(2, Sizing.PIXELS, 38);
 		
 		// textField
 		textField = new TextField();
 		textField.setClearMode(TextClearMode.CLEAR_MODE_WHILE_EDITING);
+		textField.setTextHint("Create Watchlist");
 		topPanel.add(textField, "hfill=fill,valign=center");
 		// addButton
-		addButton = new Button();
+		addButton = new BackgroundButton();
 		addButton.setText("ADD");
 		topPanel.add(addButton, "hfill=fill,vfill=fill,valign=center");
 		// editButton
-		editButton = new Button();
+		editButton = new BackgroundButton();
 		editButton.setText("EDIT");
+		editButton.setHorizontalTextAlignment(HorizontalAlignmentType.CENTER);
+		editButton.setForeColor(Colors.White);
+		editButton.setFont(style.getFont(12));
 		topPanel.add(editButton, "hfill=fill,vfill=fill,valign=center");		
 		return topPanel;
 	}
 	
 	private Panel segmentPanel() {
-		segmentPanel = new TablePanel();
-		segmentPanel.setRowHeight(0, Sizing.PIXELS, 40);
-		segmentPanel.setColumnWidth(0, Sizing.PIXELS, 158);
-		segmentPanel.setColumnWidth(1, Sizing.PIXELS, 158);
-		segmentPanel.setColumnWidth(2, Sizing.PREFERRED, 1);
-		myWatchlistButton = new Button();
-		myWatchlistButton.setText("MY WATCHLIST");
-		myWatchlistButton.addListener(this);
-		segmentPanel.add(myWatchlistButton, "hfill=fill,vfill=fill,valign=center,halign=right");
-		sharedWatchlistButton = new Button();
-		sharedWatchlistButton.setText("SHARED WATCHLIST");
-		sharedWatchlistButton.addListener(this);
-		segmentPanel.add(sharedWatchlistButton, "hfill=fill,vfill=fill,valign=center,halign=left");	
-		segmentPanel.add(new Separator(), "hfill=fill");
+		segmentObjectArray.add("MY WATCHLIST");
+		segmentObjectArray.add("SHARED WATCHLIST");		
+		segmentPanel = new SegmentPanel(segmentObjectArray,333,(OnSegmentSelectedListener)this);
+		segmentPanel.setRowHeight(0, Sizing.PIXELS, 39);
+		
+		
 		return segmentPanel;
 	}
 	
@@ -165,12 +190,20 @@ public class AddToWatchlistPanel extends TablePanel implements
 		sharedWatchlistPanel.setRowHeight(0, Sizing.PREFERRED, 1);
 		sharedWatchlistPanel.setColumnWidth(0, Sizing.PIXELS, 333);		
 		myWatchlistTable = new StickyTable();
+		myWatchlistTable.setGridLineStyle(LineStyle.NONE);
 		sharedWatchlistTable = new StickyTable();
+		sharedWatchlistTable.setGridLineStyle(LineStyle.NONE);
+		
 		myWatchlistPanel.add(myWatchlistTable);
 		sharedWatchlistPanel.add(sharedWatchlistTable);
 		stacktPanel.add(myWatchlistPanel);
 		stacktPanel.add(sharedWatchlistPanel);
 		stacktPanel.select(myWatchlistPanel);
+		
+		// debug
+		myWatchlistTable.setBackColor(Colors.Blue);
+		sharedWatchlistTable.setBackColor(Colors.Red);
+		
 		return stacktPanel;
 	}
 	
@@ -306,6 +339,20 @@ public class AddToWatchlistPanel extends TablePanel implements
 	public void onFocusLost(Control c) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	//================================================================================
+    // OnSegmentSelectedListener
+    //================================================================================	
+	
+	public void onSegmentSelected(Object obj)
+	{
+		BackgroundButton button = (BackgroundButton)obj;
+		if (button.getText()==segmentObjectArray.getItem(0)) {
+			stacktPanel.select(myWatchlistPanel);
+		} else {
+			stacktPanel.select(sharedWatchlistPanel);
+		}
 	}
 
 }

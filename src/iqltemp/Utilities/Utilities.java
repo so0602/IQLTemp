@@ -1,4 +1,4 @@
-package iqltemp;
+package iqltemp.Utilities;
 
 import com.antennasoftware.api.ui.Device;
 import com.antennasoftware.api.ui.Font;

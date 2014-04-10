@@ -1,7 +1,7 @@
 package iqltemp.overview;
 
 import iqltemp.IqltempApplication;
-import iqltemp.Utilities;
+import iqltemp.Utilities.Utilities;
 import iqltemp.listeners.OnSizeChangeListener;
 import iqltemp.models.OverviewBusDesc;
 
