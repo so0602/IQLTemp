@@ -68,33 +68,13 @@ public class MenuPanel extends TablePanel implements ContainerListener, TableVie
 	}
 
 	public void onCreate(Container source) {
-		// TODO Auto-generated method stub
-		
-		dataSources = new ObjectArray();
-		dataSources.add("Overview");
-		dataSources.add("Ownership");
-		dataSources.add("Professionals");
-		dataSources.add("Developments");
-		dataSources.add("News");
-		dataSources.add("Quick Comps");
-		dataSources.add("Transactions");
-		dataSources.add("Research");
-		dataSources.add("Filings");
-		dataSources.add("Transcripts");
-		
+		// TODO Auto-generated method stub		
 		setBackColor(Colors.DarkGray);
 		setColumnWidth(0, Sizing.PIXELS, 143);
 		
-		stkTable = new StickyTable();
-		stkTable.setBackColor(Color.create(68, 68, 68));
-		stkTable.setGridLineStyle(LineStyle.NONE);
-		stkTable.addListener(this);
-		stkTable.setNumberOfGroups(1);
-		stkTable.setNumberOfCellsInGroup(0,dataSources.size());
+		loadData();
 		
-		add(stkTable, "hfill=fill, vfill=fill");
-
-		//stkTable.refresh();
+		add(stkTable(), "hfill=fill, vfill=fill");
 	}
 
 	public void onDeactivate(Container source) {
@@ -124,7 +104,38 @@ public class MenuPanel extends TablePanel implements ContainerListener, TableVie
 		}
 	}
 
-
+	//================================================================================
+    // Private
+    //================================================================================
+	private void loadData() {
+		dataSources = new ObjectArray();
+		dataSources.add("Overview");
+		dataSources.add("Ownership");
+		dataSources.add("Professionals");
+		dataSources.add("Developments");
+		dataSources.add("News");
+		dataSources.add("Quick Comps");
+		dataSources.add("Transactions");
+		dataSources.add("Research");
+		dataSources.add("Filings");
+		dataSources.add("Transcripts");		
+	}
+	
+	private StickyTable stkTable() {
+		stkTable = new StickyTable();
+		stkTable.setBackColor(Color.create(68, 68, 68));
+		stkTable.setGridLineStyle(LineStyle.NONE);
+		stkTable.addListener(this);
+		stkTable.setNumberOfGroups(1);
+		stkTable.setNumberOfCellsInGroup(0,dataSources.size());
+		return stkTable;
+	}
+	
+	
+	//================================================================================
+    // TableViewActionListener
+    //================================================================================
+	
 	public void onAccessory(TableView c, int group, int row) {
 		// TODO Auto-generated method stub
 		
@@ -254,6 +265,10 @@ public class MenuPanel extends TablePanel implements ContainerListener, TableVie
 		}
 	}
 
+	//================================================================================
+    // ControlActionListener
+    //================================================================================	
+	
 	public void onClick(Control c) {
 		// TODO Auto-generated method stub
 		

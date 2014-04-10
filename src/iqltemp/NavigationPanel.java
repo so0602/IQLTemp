@@ -8,6 +8,7 @@ import com.antennasoftware.api.ui.HorizontalAlignmentType;
 import com.antennasoftware.api.ui.Sizing;
 import com.antennasoftware.api.ui.Widget;
 import com.antennasoftware.api.ui.collections.ObjectArray;
+import com.antennasoftware.api.ui.control.BackgroundButton;
 import com.antennasoftware.api.ui.control.Button;
 import com.antennasoftware.api.ui.control.Label;
 import com.antennasoftware.api.ui.control.Separator;
@@ -95,6 +96,10 @@ public class NavigationPanel extends TablePanel implements ContainerListener {
 		super.destroy();
 	}
 	
+	//================================================================================
+    // Public
+    //================================================================================	
+	
 	public void setTitle(String title){
 		this.title = title;
 		if( this.titleLabel != null ){
@@ -111,6 +116,15 @@ public class NavigationPanel extends TablePanel implements ContainerListener {
 		leftButtonPanel.add(button,"halign=left, valign=center");
 	}
 	
+	public void addLeftButton(BackgroundButton button){
+		if( leftButtons == null ){
+			leftButtons = new ObjectArray();
+		}		
+		leftButtons.add(button);
+		leftButtonPanel.add(new Separator());		
+		leftButtonPanel.add(button,"halign=left, valign=center");
+	}	
+	
 	public void addRightButton(Button button){
 		if( rightButtons == null ){
 			rightButtons = new ObjectArray();
@@ -118,8 +132,16 @@ public class NavigationPanel extends TablePanel implements ContainerListener {
 		rightButtons.add(button);			
 		rightButtonPanel.add(button,"halign=right, valign=center");
 		rightButtonPanel.add(new Separator());		
-	}
+	}	
 	
+	public void addRightButton(BackgroundButton button){
+		if( rightButtons == null ){
+			rightButtons = new ObjectArray();
+		}
+		rightButtons.add(button);			
+		rightButtonPanel.add(button,"halign=right, valign=center");
+		rightButtonPanel.add(new Separator());		
+	}
 	
 	public void setNavigationStyle(int navigationStyle){
 		//this.navigationStyle = navigationStyle;
