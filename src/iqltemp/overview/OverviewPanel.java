@@ -72,7 +72,7 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 		mainTable = new StickyTable();
 		mainTable.addListener(this);
 		mainTable.setNumberOfGroups(1);
-		mainTable.setNumberOfCellsInGroup(0, 2);
+		mainTable.setNumberOfCellsInGroup(0, 8);
 		add(mainTable, "hfill=fill, vfill=fill");
 		startNewRow();
 	}
@@ -138,6 +138,9 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 			cell = new OverviewFundChartBasicFinTableViewCell(this.orientation);
 			application.log(this.toString(), "onCellCreateInfo", "Create Row 1: " + this.orientation);
 			break;
+		default:
+			cell = new OverviewFundChartBasicFinTableViewCell(this.orientation);
+			break;
 		}
 		info.setPanel(cell);
 		application.log(this.toString(), "onCellCreateInfo", cell.toString());
@@ -176,7 +179,7 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 			sizeInfo.setSize(1024, this.orientation == Utilities.SCREEN_ORIENTATION_PORTRAIT ? OVERVIEW_FCBF_HEIGHT_PORTRAIT : OVERVIEW_FCBF_HEIGHT_LANDSCAPE);
 			break;
 		default:
-			sizeInfo.setSize(1024, 0);
+			sizeInfo.setSize(1024, this.orientation == Utilities.SCREEN_ORIENTATION_PORTRAIT ? OVERVIEW_FCBF_HEIGHT_PORTRAIT : OVERVIEW_FCBF_HEIGHT_LANDSCAPE);
 			break;
 		}
 	}

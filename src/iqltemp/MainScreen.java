@@ -179,7 +179,7 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 		mainPanel = new TablePanel();
 		mainPanel.setColumnWidth(0, Sizing.PREFERRED, 0);
 		mainPanel.setColumnWidth(1, Sizing.PREFERRED, 1);
-		mainPanel.setRowHeight(2, Sizing.PERCENTS, 100);
+		mainPanel.setRowHeight(2, Sizing.PREFERRED, 1);
 		
 		mainPanel.add(navigationPanel(), "hfill=fill, colspan=2");				
 		mainPanel.startNewRow();
@@ -195,7 +195,7 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 		contentPanel = new ContentPanel();
 		contentPanel.containerScreen = this;
 		mainPanel.add(contentPanel,"hfill=fill, vfill=fill");		
-		mainPanel.startNewRow();
+//		mainPanel.startNewRow();
 		
 		return mainPanel;
 	}
