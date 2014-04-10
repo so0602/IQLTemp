@@ -10,6 +10,7 @@ import com.antennasoftware.api.ui.Background;
 import com.antennasoftware.api.ui.Color;
 import com.antennasoftware.api.ui.Colors;
 import com.antennasoftware.api.ui.Container;
+import com.antennasoftware.api.ui.Device;
 import com.antennasoftware.api.ui.InputEvent;
 import com.antennasoftware.api.ui.Screen;
 import com.antennasoftware.api.ui.ScreenListener;
@@ -28,11 +29,12 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 	private ScrollableHorizontalPanel basePanel;
 	private TablePanel hiddenLeftPanel;
 	private TablePanel mainPanel;		
-	private NavigationPanel navigationPanel;
+	private NavigationPanel navigationPanel;	
 	private BackgroundButton addToWatchlistButton = new BackgroundButton();
 	private BackgroundButton backButton = new BackgroundButton();
 	private CompanyPanel comapnyPanel;
 	private MenuPanel menuPanel;
+	private TablePanel rightPanel = new TablePanel();	
 	private AddToWatchlistPanel addToWatchlistPanel = new AddToWatchlistPanel();
 	
 	public ContentPanel contentPanel;
@@ -40,6 +42,9 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 	private boolean toggle;
 		
 	public int orientation;
+	
+	private static final int MAINSCREEN_NAVIGATIONBAR_HEIGHT = 44;
+	private static final int MAINSCREEN_COMPANY_HEIGHT = 60;
 
 	public MainScreen() {
 		this.addListener(this);
@@ -63,12 +68,15 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 	}
 
 	public void onCreate(Container source) {
-		// TODO Auto-generated method stub		
+		// TODO Auto-generated method stub
+		setRowHeight(0, Sizing.PERCENTS, 100);
 		add(basePanel(), "hfill=fill, vfill=fill");
 				
 		basePanel.add(hiddenLeftPanel(), "vfill=fill");
-		basePanel.add(mainPanel(), "vfill=fill");
-		basePanel.add(addToWatchlistPanel, " vfill=fill");			
+		basePanel.add(mainPanel(), "vfill=fill");		
+		basePanel.add(rightPanel(), "vfill=fill");
+		
+		this.setOrientation(Device.getScreenOrientation());
 	}
 
 	public void onDeactivate(Container source) {
@@ -140,13 +148,12 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 
 	public void onStartOrientationChange(Screen screen, int orientation) {
 		// TODO Auto-generated method stub
-		this.orientation = orientation;
 		
-		int _orientation = Utilities.isPortrait(orientation) ? Utilities.SCREEN_ORIENTATION_PORTRAIT : Utilities.SCREEN_ORIENTATION_LANDSCAPE;
-		
-		this.menuPanel.setOrientation(_orientation);
-		this.contentPanel.setOrientation(_orientation);
-		this.comapnyPanel.setOrientation(_orientation);
+		this.setOrientation(orientation);
+		this.menuPanel.setOrientation(this.orientation);
+		this.contentPanel.setOrientation(this.orientation);
+		this.comapnyPanel.setOrientation(this.orientation);
+		toggle = false;
 	}
 
 	public void destroy() {
@@ -179,7 +186,8 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 		mainPanel = new TablePanel();
 		mainPanel.setColumnWidth(0, Sizing.PREFERRED, 0);
 		mainPanel.setColumnWidth(1, Sizing.PREFERRED, 1);
-		mainPanel.setRowHeight(2, Sizing.PREFERRED, 1);
+		mainPanel.setRowHeight(0, Sizing.PIXELS, MAINSCREEN_NAVIGATIONBAR_HEIGHT);
+		mainPanel.setRowHeight(1, Sizing.PIXELS, MAINSCREEN_COMPANY_HEIGHT);
 		
 		mainPanel.add(navigationPanel(), "hfill=fill, colspan=2");				
 		mainPanel.startNewRow();
@@ -194,9 +202,9 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 		
 		contentPanel = new ContentPanel();
 		contentPanel.containerScreen = this;
-		mainPanel.add(contentPanel,"hfill=fill, vfill=fill");		
-//		mainPanel.startNewRow();
-		
+		mainPanel.add(contentPanel,"hfill=fill, vfill=fill");
+		mainPanel.startNewRow();
+        
 		return mainPanel;
 	}
 	
@@ -214,6 +222,14 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 		addToWatchlistButton.setText("Add To Watchlist >");		
 		navigationPanel.addRightButton(addToWatchlistButton);
 		return navigationPanel;
+	}
+	
+	private Panel rightPanel() {
+		rightPanel = new TablePanel();
+		rightPanel.setRowHeight(0, Sizing.PERCENTS, 100);
+		rightPanel.setColumnWidth(0, Sizing.PIXELS, 333);
+		rightPanel.add(addToWatchlistPanel, "hfill=fill,vfill=fill");
+		return rightPanel;
 	}
 
 	//================================================================================
@@ -248,10 +264,9 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 				//basePanel.refresh();
 				toggle = false;
 			} else {
-				basePanel.reveal(addToWatchlistPanel);
+				basePanel.reveal(rightPanel);
 				toggle = true;
-			}	
-			
+			}				
 		}
 	}
 
@@ -263,6 +278,23 @@ public class MainScreen extends Screen implements ScreenListener, OnSelectedList
 	public void onFocusLost(Control c) {
 		// TODO Auto-generated method stub
 		
-	}	
+	}
+	
+	public void setOrientation(int orientation){
+		this.orientation = Utilities.isPortrait(orientation) ? Utilities.SCREEN_ORIENTATION_PORTRAIT : Utilities.SCREEN_ORIENTATION_LANDSCAPE;
+		
+		int height = 0;
+		switch( this.orientation ){
+		case Utilities.SCREEN_ORIENTATION_PORTRAIT:
+			height = Device.getScreenWidth() > Device.getScreenHeight() ? Device.getScreenWidth() : Device.getScreenHeight();
+			break;
+		case Utilities.SCREEN_ORIENTATION_LANDSCAPE:
+			height = Device.getScreenWidth() > Device.getScreenHeight() ? Device.getScreenHeight() : Device.getScreenWidth();
+			break;
+		}
+		IqltempApplication application = (IqltempApplication)getApplication();
+		application.log(this.toString(), "setOrientation", "orientation: " + orientation + ", height: " + height);
+		mainPanel.setRowHeight(2, Sizing.PIXELS, height - MAINSCREEN_NAVIGATIONBAR_HEIGHT - MAINSCREEN_COMPANY_HEIGHT - 20);
+	}
 
 }

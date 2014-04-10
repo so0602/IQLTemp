@@ -6,7 +6,6 @@ import iqltemp.Reusable.UIControl.SegmentPanel;
 import iqltemp.listeners.OnSegmentSelectedListener;
 
 import com.antennasoftware.api.ui.AbsoluteSize;
-import com.antennasoftware.api.ui.Background;
 import com.antennasoftware.api.ui.Color;
 import com.antennasoftware.api.ui.Colors;
 import com.antennasoftware.api.ui.Container;
@@ -21,7 +20,6 @@ import com.antennasoftware.api.ui.component.Cell;
 import com.antennasoftware.api.ui.component.Footer;
 import com.antennasoftware.api.ui.component.Header;
 import com.antennasoftware.api.ui.control.BackgroundButton;
-import com.antennasoftware.api.ui.control.Button;
 import com.antennasoftware.api.ui.control.CellConfig;
 import com.antennasoftware.api.ui.control.CellType;
 import com.antennasoftware.api.ui.control.Control;
@@ -38,7 +36,6 @@ import com.antennasoftware.api.ui.panel.TablePanel;
 import com.antennasoftware.api.ui.panel.TableViewCell;
 import com.antennasoftware.api.ui.panel.TableViewPanel;
 import com.antennasoftware.api.ui.styles.StyleReceptor;
-import com.antennasoftware.core.foundation.data.datasource.ext.DataSource;
 import com.antennasoftware.core.ui.control.ControlActionListener;
 
 public class AddToWatchlistPanel extends TablePanel implements
@@ -61,8 +58,9 @@ public class AddToWatchlistPanel extends TablePanel implements
 	private StickyTable sharedWatchlistTable;
 
 	private ObjectArray segmentObjectArray = new ObjectArray();
-	private ObjectArray myWatchlistDataSources;
-	private ObjectArray sharedWatchlistDataSources;
+	private ObjectArray myWatchlistDataSources = new ObjectArray();
+	private ObjectArray sharedWatchlistDataSources = new ObjectArray();
+	private int selectedRow;
 
 	
 	public AddToWatchlistPanel() {
@@ -99,6 +97,7 @@ public class AddToWatchlistPanel extends TablePanel implements
 		setRowHeight(2, Sizing.PIXELS, 39);
 		setRowHeight(3, Sizing.PIXELS, 1);
 		setRowHeight(4, Sizing.PREFERRED, 1);
+		//setRowHeight(4, Sizing.PIXELS, 500);
 	
 		// Column 1
 		add(new Separator(), "hfill=fill");					
@@ -122,7 +121,9 @@ public class AddToWatchlistPanel extends TablePanel implements
 		startNewRow();
 		
 		// Column 5
-		add(stackPanel(), "hfill=fill,vfill=fill,colspan=3");			
+		add(stackPanel(), "hfill=fill,vfill=fill,colspan=3");
+		
+		loadData();
 	}
 
 	public void onDeactivate(Container source) {
@@ -145,6 +146,38 @@ public class AddToWatchlistPanel extends TablePanel implements
     // Private
     //================================================================================	
 	
+	private void loadData() {
+		myWatchlistDataSources.add("My watchlist 1");
+		myWatchlistDataSources.add("My watchlist 2");
+		myWatchlistDataSources.add("My watchlist 3");
+		myWatchlistDataSources.add("My watchlist 1");
+		myWatchlistDataSources.add("My watchlist 2");
+		myWatchlistDataSources.add("My watchlist 3");
+		myWatchlistDataSources.add("My watchlist 1");
+		myWatchlistDataSources.add("My watchlist 2");
+		myWatchlistDataSources.add("My watchlist 3");
+		myWatchlistDataSources.add("My watchlist 1");
+		myWatchlistDataSources.add("My watchlist 2");
+		myWatchlistDataSources.add("My watchlist 3");
+		myWatchlistDataSources.add("My watchlist 1");
+		myWatchlistDataSources.add("My watchlist 2");
+		myWatchlistDataSources.add("My watchlist 3");
+		myWatchlistDataSources.add("My watchlist 1");
+		myWatchlistDataSources.add("My watchlist 2");
+		myWatchlistDataSources.add("My watchlist 3");
+		
+		
+		sharedWatchlistDataSources.add("Shared watchlist 1");
+		sharedWatchlistDataSources.add("Shared watchlist 2");
+		sharedWatchlistDataSources.add("Shared watchlist 3");
+		sharedWatchlistDataSources.add("Shared watchlist 4");
+		
+		myWatchlistTable.setNumberOfCellsInGroup(0,myWatchlistDataSources.size());
+		sharedWatchlistTable.setNumberOfCellsInGroup(0,sharedWatchlistDataSources.size());
+		myWatchlistTable.refresh();
+		sharedWatchlistTable.refresh();
+	}
+	
 	private Panel topPanel() {
 		topPanel = new TablePanel();
 		topPanel.setRowHeight(0, Sizing.PIXELS, 43);
@@ -164,6 +197,7 @@ public class AddToWatchlistPanel extends TablePanel implements
 		// editButton
 		editButton = new BackgroundButton();
 		editButton.setText("EDIT");
+		editButton.addListener(this);
 		editButton.setHorizontalTextAlignment(HorizontalAlignmentType.CENTER);
 		editButton.setForeColor(Colors.White);
 		editButton.setFont(style.getFont(12));
@@ -175,36 +209,48 @@ public class AddToWatchlistPanel extends TablePanel implements
 		segmentObjectArray.add("MY WATCHLIST");
 		segmentObjectArray.add("SHARED WATCHLIST");		
 		segmentPanel = new SegmentPanel(segmentObjectArray,333,(OnSegmentSelectedListener)this);
-		segmentPanel.setRowHeight(0, Sizing.PIXELS, 39);
-		
+		segmentPanel.setRowHeight(0, Sizing.PIXELS, 39);		
 		
 		return segmentPanel;
 	}
 	
 	private StackPanel stackPanel() {
-		stacktPanel = new StackPanel();		
+		stacktPanel = new StackPanel();
 		myWatchlistPanel = new TablePanel();
+		
 		myWatchlistPanel.setRowHeight(0, Sizing.PREFERRED, 1);
 		myWatchlistPanel.setColumnWidth(0, Sizing.PIXELS, 333);		
 		sharedWatchlistPanel = new TablePanel();
 		sharedWatchlistPanel.setRowHeight(0, Sizing.PREFERRED, 1);
-		sharedWatchlistPanel.setColumnWidth(0, Sizing.PIXELS, 333);		
-		myWatchlistTable = new StickyTable();
-		myWatchlistTable.setGridLineStyle(LineStyle.NONE);
-		sharedWatchlistTable = new StickyTable();
-		sharedWatchlistTable.setGridLineStyle(LineStyle.NONE);
+		sharedWatchlistPanel.setColumnWidth(0, Sizing.PIXELS, 333);
 		
-		myWatchlistPanel.add(myWatchlistTable);
-		sharedWatchlistPanel.add(sharedWatchlistTable);
+		myWatchlistTable = new StickyTable();
+		buildTable(myWatchlistTable);
+				
+		sharedWatchlistTable = new StickyTable();
+		buildTable(sharedWatchlistTable);
+					
+		myWatchlistPanel.add(myWatchlistTable, "hfill=fill,vfill=fill");
+		sharedWatchlistPanel.add(sharedWatchlistTable, "hfill=fill,vfill=fill");
 		stacktPanel.add(myWatchlistPanel);
 		stacktPanel.add(sharedWatchlistPanel);
 		stacktPanel.select(myWatchlistPanel);
 		
 		// debug
-		myWatchlistTable.setBackColor(Colors.Blue);
-		sharedWatchlistTable.setBackColor(Colors.Red);
+//		myWatchlistTable.setBackColor(Colors.Blue);
+//		sharedWatchlistTable.setBackColor(Colors.Green);
+//		myWatchlistPanel.setBackColor(Colors.Red);
 		
 		return stacktPanel;
+	}
+	
+	private void buildTable(StickyTable table) {
+		table.setGridLineStyle(LineStyle.NONE);
+		table.addListener(this);
+		table.setNumberOfGroups(1);
+		table.setEditable(true);
+		table.setCouldRearrangeCells(true);
+		table.setDeleteButtonText("Delete");
 	}
 	
 	//================================================================================
@@ -218,25 +264,36 @@ public class AddToWatchlistPanel extends TablePanel implements
 
 	public void onCellConfigure(TableView c, CellConfig cell, int group) {
 		// TODO Auto-generated method stub
-		
+		cell.setHeight(Sizing.PIXELS, 62);
+		cell.setWidth(Sizing.PREFERRED, 1);
+		cell.setCouldBeSelected(true);
 	}
 
 	public void onCellCreateInfo(TableView c, TableViewCellCreateInfo info,
 			int group, int row) {
 		// TODO Auto-generated method stub
-		
+		info.setPanel(new AddToWatchlistTableViewCell());
 	}
 
 	public void onCellInfo(TableView c, TableViewCell cell, Cell info,
 			int group, int row) {
 		// TODO Auto-generated method stub
-		
+		AddToWatchlistTableViewCell tableViewCell = (AddToWatchlistTableViewCell) cell;
+		ObjectArray dataSource;
+		if (c==myWatchlistTable) {
+			dataSource = myWatchlistDataSources;
+		} else {
+			dataSource = sharedWatchlistDataSources;
+		}
+		tableViewCell.populateData((String)dataSource.getItem(row),(row==selectedRow));
+			
+		tableViewCell.refresh();
 	}
 
 	public void onCellSize(TableView c, AbsoluteSize sizeInfo, int group,
 			int row) {
 		// TODO Auto-generated method stub
-		
+		sizeInfo.setHeight(62);
 	}
 
 	public void onCellType(TableView c, CellType type, int group, int row) {
@@ -327,8 +384,14 @@ public class AddToWatchlistPanel extends TablePanel implements
 		if (c==myWatchlistButton)
 			stacktPanel.select(myWatchlistPanel);
 		else if (c==sharedWatchlistButton)
-			stacktPanel.select(sharedWatchlistPanel);			
-					
+			stacktPanel.select(sharedWatchlistPanel);
+		else if (c==editButton) {
+			myWatchlistTable.setEditableAnimationType(StickyTable.EDITING_ANIMATION_FADE);
+			myWatchlistTable.setEditing(!myWatchlistTable.isEditing(), true);
+		
+			sharedWatchlistTable.setEditableAnimationType(StickyTable.EDITING_ANIMATION_FADE);
+			sharedWatchlistTable.setEditing(!sharedWatchlistTable.isEditing(), true);
+		}
 	}
 
 	public void onFocusGained(Control c) {
@@ -355,4 +418,6 @@ public class AddToWatchlistPanel extends TablePanel implements
 		}
 	}
 
+	
+	
 }
