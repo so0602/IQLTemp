@@ -202,6 +202,7 @@ public class AddToWatchlistPanel extends TablePanel implements
 		// editButton
 		editButton = new BackgroundButton();
 		editButton.setText("EDIT");
+		editButton.addListener(this);
 		editButton.setHorizontalTextAlignment(HorizontalAlignmentType.CENTER);
 		editButton.setForeColor(Colors.White);
 		editButton.setFont(style.getFont(12));
@@ -229,17 +230,11 @@ public class AddToWatchlistPanel extends TablePanel implements
 		sharedWatchlistPanel.setColumnWidth(0, Sizing.PIXELS, 333);
 		
 		myWatchlistTable = new StickyTable();
-		myWatchlistTable.setGridLineStyle(LineStyle.NONE);
-		myWatchlistTable.addListener(this);
-		myWatchlistTable.setNumberOfGroups(1);
-		
-		
+		buildTable(myWatchlistTable);
+				
 		sharedWatchlistTable = new StickyTable();
-		sharedWatchlistTable.setGridLineStyle(LineStyle.NONE);
-		sharedWatchlistTable.addListener(this);
-		sharedWatchlistTable.setNumberOfGroups(1);
-			
-		
+		buildTable(sharedWatchlistTable);
+					
 		myWatchlistPanel.add(myWatchlistTable, "hfill=fill,vfill=fill");
 		sharedWatchlistPanel.add(sharedWatchlistTable, "hfill=fill,vfill=fill");
 		stacktPanel.add(myWatchlistPanel);
@@ -252,6 +247,15 @@ public class AddToWatchlistPanel extends TablePanel implements
 //		myWatchlistPanel.setBackColor(Colors.Red);
 		
 		return stacktPanel;
+	}
+	
+	private void buildTable(StickyTable table) {
+		table.setGridLineStyle(LineStyle.NONE);
+		table.addListener(this);
+		table.setNumberOfGroups(1);
+		table.setEditable(true);
+		table.setCouldRearrangeCells(true);
+		table.setDeleteButtonText("Delete");
 	}
 	
 	//================================================================================
@@ -385,8 +389,14 @@ public class AddToWatchlistPanel extends TablePanel implements
 		if (c==myWatchlistButton)
 			stacktPanel.select(myWatchlistPanel);
 		else if (c==sharedWatchlistButton)
-			stacktPanel.select(sharedWatchlistPanel);			
-					
+			stacktPanel.select(sharedWatchlistPanel);
+		else if (c==editButton) {
+			myWatchlistTable.setEditableAnimationType(StickyTable.EDITING_ANIMATION_FADE);
+			myWatchlistTable.setEditing(!myWatchlistTable.isEditing(), true);
+		
+			sharedWatchlistTable.setEditableAnimationType(StickyTable.EDITING_ANIMATION_FADE);
+			sharedWatchlistTable.setEditing(!sharedWatchlistTable.isEditing(), true);
+		}
 	}
 
 	public void onFocusGained(Control c) {

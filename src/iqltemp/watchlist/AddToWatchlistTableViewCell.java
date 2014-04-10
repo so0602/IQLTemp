@@ -10,6 +10,7 @@ import com.antennasoftware.api.ui.Sizing;
 import com.antennasoftware.api.ui.TableViewCellListener;
 import com.antennasoftware.api.ui.Widget;
 import com.antennasoftware.api.ui.component.Cell;
+import com.antennasoftware.api.ui.control.Accessory;
 import com.antennasoftware.api.ui.control.Button;
 import com.antennasoftware.api.ui.control.Control;
 import com.antennasoftware.api.ui.control.Label;
@@ -52,6 +53,10 @@ public class AddToWatchlistTableViewCell extends TableViewCell implements
 
 	public void onCreate(Container source) {
 		// TODO Auto-generated method stub
+		setEditable(true);
+		setCouldBeMoved(true);
+		enableSwipeToDelete(true);
+		
 		setRowHeight(0, Sizing.PREFERRED, 1);
 		setColumnWidth(0, Sizing.PREFERRED, 1);
 		
@@ -82,6 +87,7 @@ public class AddToWatchlistTableViewCell extends TableViewCell implements
 		mainPanel.add(separator, "hfill=fill, vfill=fill, colspan=2");
 		
 		add(mainPanel, "hfill=fill, vfill=fill");
+		
 	}
 
 	public void onDeactivate(Container source) {
@@ -106,7 +112,7 @@ public class AddToWatchlistTableViewCell extends TableViewCell implements
 
 	public void onEditing(TableViewCell cell, boolean editing, boolean animated) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	public void onFocusGained(TableViewCell cell) {
@@ -141,9 +147,9 @@ public class AddToWatchlistTableViewCell extends TableViewCell implements
 	
 	public void populateData(String title, boolean selected){
 		titleLabel.setText(title);
-		if (selected)
-			titleLabel.setForeColor(Color.create(37, 176, 208));
-		else 
+//		if (selected)
+//			titleLabel.setForeColor(Color.create(37, 176, 208));
+//		else 
 			titleLabel.setForeColor(Color.create(203, 203, 203));
 			
 	}
