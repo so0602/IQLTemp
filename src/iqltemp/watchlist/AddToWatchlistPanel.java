@@ -204,7 +204,6 @@ public class AddToWatchlistPanel extends TablePanel implements
 		myWatchlistTable.setBackColor(Colors.Blue);
 		sharedWatchlistTable.setBackColor(Colors.Red);
 		
-		
 		return stacktPanel;
 	}
 	

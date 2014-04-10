@@ -7,7 +7,6 @@
   <properties xsi:type="com.vaultus.ecore.properties:StringProperty" name="description"/>
   <properties xsi:type="com.vaultus.ecore.properties:StringProperty" name="generatedPrefix" string="iqltemp.gen"/>
   <properties xsi:type="com.vaultus.ecore.properties:BooleanProperty" name="hidden"/>
-  <properties xsi:type="com.vaultus.ecore.properties:StringProperty" name="lastPackage" string="iqltemp.Reusable.UIControl"/>
   <properties xsi:type="com.vaultus.ecore.properties:StringProperty" name="lastPackage" string="iqltemp.overview"/>
   <properties xsi:type="com.vaultus.ecore.properties:StringProperty" name="lastSourceFolder" string="src"/>
   <properties xsi:type="com.vaultus.studio.ecore.log:LogLevelProperty" name="logLevel" logLevel="INFO"/>

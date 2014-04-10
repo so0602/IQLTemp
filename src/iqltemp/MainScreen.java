@@ -1,5 +1,6 @@
 package iqltemp;
 
+import iqltemp.Utilities.Utilities;
 import iqltemp.listeners.OnDimissScreenListener;
 import iqltemp.listeners.OnSelectedListener;
 import iqltemp.transactions.TransactionDetailPanel;

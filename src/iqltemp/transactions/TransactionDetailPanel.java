@@ -3,7 +3,7 @@ package iqltemp.transactions;
 import iqltemp.DefaultStyle;
 import iqltemp.IqltempApplication;
 import iqltemp.NavigationPanel;
-import iqltemp.Utilities;
+import iqltemp.Utilities.Utilities;
 import iqltemp.listeners.OnDimissScreenListener;
 
 import com.antennasoftware.api.ui.Color;

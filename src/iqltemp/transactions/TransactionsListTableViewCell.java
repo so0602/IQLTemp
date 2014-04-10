@@ -1,6 +1,6 @@
 package iqltemp.transactions;
 
-import iqltemp.Utilities;
+import iqltemp.Utilities.Utilities;
 import iqltemp.models.Transaction;
 
 import com.antennasoftware.api.ui.Colors;
