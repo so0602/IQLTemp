@@ -4,7 +4,6 @@ import iqltemp.listeners.OnSelectedListener;
 import iqltemp.overview.OverviewPanel;
 import iqltemp.transactions.TransactionsPanel;
 
-import com.antennasoftware.api.ui.Colors;
 import com.antennasoftware.api.ui.Container;
 import com.antennasoftware.api.ui.ContainerListener;
 import com.antennasoftware.api.ui.Screen;
@@ -46,8 +45,6 @@ public class ContentPanel extends StackPanel implements ContainerListener {
 
 	public void onCreate(Container source) {
 		// TODO Auto-generated method stub
-		
-		setBackColor(Colors.Chocolate);
 		
 		overviewPanel = new OverviewPanel();
 		add(overviewPanel);

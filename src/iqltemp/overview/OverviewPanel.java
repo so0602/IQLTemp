@@ -74,7 +74,7 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 		mainTable = new StickyTable();
 		mainTable.addListener(this);
 		mainTable.setNumberOfGroups(1);
-		mainTable.setNumberOfCellsInGroup(0, 8);
+		mainTable.setNumberOfCellsInGroup(0, 2);
 		add(mainTable, "hfill=fill, vfill=fill");
 		startNewRow();
 	}
@@ -124,6 +124,7 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 	public void onCellConfigure(TableView c, CellConfig cell, int group) {
 		// TODO Auto-generated method stub
 		cell.setWidth(Sizing.PREFERRED, 1);
+		cell.setHeight(Sizing.PREFERRED, 1);
 		cell.setCouldBeSelected(true);
 	}
 
@@ -139,7 +140,6 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 			cell = new OverviewFundChartBasicFinTableViewCell(this.orientation);
 			break;
 		default:
-			cell = new OverviewFundChartBasicFinTableViewCell(this.orientation);
 			break;
 		}
 		info.setPanel(cell);
@@ -151,18 +151,11 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 		// TODO Auto-generated method stub
 		application.log(this.toString(), "onCellInfo", cell.toString());
 		if( cell instanceof OverviewBusDescTableViewCell ){
-			boolean needReload = busDescTableViewCell == null;
 			busDescTableViewCell = (OverviewBusDescTableViewCell)cell;
 			busDescTableViewCell.addOnSizeChangeListener(this);
 			busDescTableViewCell.setOrientation(this.orientation);
 			busDescTableViewCell.populateData(new OverviewBusDesc().randomOverviewBusDesc());
 			busDescTableViewCell.isExpand = busDescTableViewCellIsExpand;
-			
-			if( needReload ){
-				c.reload(group, row);
-			}else if( busDescTableViewCell.getHeight() != busDescTableViewCellHeight ){
-				c.reload(group, row);
-			}
 		}else if( cell instanceof OverviewFundChartBasicFinTableViewCell ){
 			((OverviewFundChartBasicFinTableViewCell)cell).populateData();
 		}
@@ -174,13 +167,23 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 		int height = 0;
 		switch( row ){
 		case 0:
-			height = busDescTableViewCellHeight != 0 ? busDescTableViewCellHeight : busDescTableViewCell.getHeight();
+		{
+			if( busDescTableViewCell == null ){
+				OverviewBusDescTableViewCell cell = new OverviewBusDescTableViewCell();
+				cell.setOrientation(this.orientation);
+				cell.populateData(new OverviewBusDesc().randomOverviewBusDesc());
+				cell.isExpand = busDescTableViewCellIsExpand;
+				cell.onCreate();
+				height = cell.getHeight();
+			}else{
+				height = busDescTableViewCellHeight != 0 ? busDescTableViewCellHeight : busDescTableViewCell.getHeight();
+			}
+		}
 			break;
 		case 1:
 			height = this.orientation == Utilities.SCREEN_ORIENTATION_PORTRAIT ? OVERVIEW_FCBF_HEIGHT_PORTRAIT : OVERVIEW_FCBF_HEIGHT_LANDSCAPE;
 			break;
 		default:
-			height = this.orientation == Utilities.SCREEN_ORIENTATION_PORTRAIT ? OVERVIEW_FCBF_HEIGHT_PORTRAIT : OVERVIEW_FCBF_HEIGHT_LANDSCAPE;
 			break;
 		}
 		sizeInfo.setHeight(height);
