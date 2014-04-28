@@ -2,10 +2,9 @@ package iqltemp.overview;
 
 import iqltemp.DefaultStyle;
 import iqltemp.IqltempApplication;
-import iqltemp.Utilities.*;
+import iqltemp.Utilities.Utilities;
 
 import com.antennasoftware.api.ui.Color;
-import com.antennasoftware.api.ui.Colors;
 import com.antennasoftware.api.ui.Container;
 import com.antennasoftware.api.ui.ContainerListener;
 import com.antennasoftware.api.ui.Sizing;

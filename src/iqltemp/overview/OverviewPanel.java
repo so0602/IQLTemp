@@ -69,10 +69,12 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 		this.application = (IqltempApplication)getApplication();
 //		this.style = application.getStyle();
 		
+		setRowHeight(0, Sizing.PREFERRED, 1);
+		
 		mainTable = new StickyTable();
 		mainTable.addListener(this);
 		mainTable.setNumberOfGroups(1);
-		mainTable.setNumberOfCellsInGroup(0, 2);
+		mainTable.setNumberOfCellsInGroup(0, 8);
 		add(mainTable, "hfill=fill, vfill=fill");
 		startNewRow();
 	}
@@ -121,7 +123,6 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 
 	public void onCellConfigure(TableView c, CellConfig cell, int group) {
 		// TODO Auto-generated method stub
-		cell.setHeight(Sizing.PREFERRED, 1);
 		cell.setWidth(Sizing.PREFERRED, 1);
 		cell.setCouldBeSelected(true);
 	}
@@ -136,7 +137,9 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 			break;
 		case 1:
 			cell = new OverviewFundChartBasicFinTableViewCell(this.orientation);
-			application.log(this.toString(), "onCellCreateInfo", "Create Row 1: " + this.orientation);
+			break;
+		default:
+			cell = new OverviewFundChartBasicFinTableViewCell(this.orientation);
 			break;
 		}
 		info.setPanel(cell);
@@ -168,17 +171,19 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 	public void onCellSize(TableView c, AbsoluteSize sizeInfo, int group,
 			int row) {
 		// TODO Auto-generated method stub
+		int height = 0;
 		switch( row ){
 		case 0:
-			sizeInfo.setSize(1024, busDescTableViewCellHeight != 0 ? busDescTableViewCellHeight : busDescTableViewCell.getHeight());
+			height = busDescTableViewCellHeight != 0 ? busDescTableViewCellHeight : busDescTableViewCell.getHeight();
 			break;
 		case 1:
-			sizeInfo.setSize(1024, this.orientation == Utilities.SCREEN_ORIENTATION_PORTRAIT ? OVERVIEW_FCBF_HEIGHT_PORTRAIT : OVERVIEW_FCBF_HEIGHT_LANDSCAPE);
+			height = this.orientation == Utilities.SCREEN_ORIENTATION_PORTRAIT ? OVERVIEW_FCBF_HEIGHT_PORTRAIT : OVERVIEW_FCBF_HEIGHT_LANDSCAPE;
 			break;
 		default:
-			sizeInfo.setSize(1024, 0);
+			height = this.orientation == Utilities.SCREEN_ORIENTATION_PORTRAIT ? OVERVIEW_FCBF_HEIGHT_PORTRAIT : OVERVIEW_FCBF_HEIGHT_LANDSCAPE;
 			break;
 		}
+		sizeInfo.setHeight(height);
 	}
 
 	public void onCellType(TableView c, CellType type, int group, int row) {

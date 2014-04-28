@@ -2,12 +2,10 @@ package iqltemp.watchlist;
 
 import iqltemp.DefaultStyle;
 import iqltemp.IqltempApplication;
-import iqltemp.MenuTableViewCell;
 import iqltemp.Reusable.UIControl.SegmentPanel;
 import iqltemp.listeners.OnSegmentSelectedListener;
 
 import com.antennasoftware.api.ui.AbsoluteSize;
-import com.antennasoftware.api.ui.Background;
 import com.antennasoftware.api.ui.Color;
 import com.antennasoftware.api.ui.Colors;
 import com.antennasoftware.api.ui.Container;
@@ -22,7 +20,6 @@ import com.antennasoftware.api.ui.component.Cell;
 import com.antennasoftware.api.ui.component.Footer;
 import com.antennasoftware.api.ui.component.Header;
 import com.antennasoftware.api.ui.control.BackgroundButton;
-import com.antennasoftware.api.ui.control.Button;
 import com.antennasoftware.api.ui.control.CellConfig;
 import com.antennasoftware.api.ui.control.CellType;
 import com.antennasoftware.api.ui.control.Control;
@@ -39,8 +36,6 @@ import com.antennasoftware.api.ui.panel.TablePanel;
 import com.antennasoftware.api.ui.panel.TableViewCell;
 import com.antennasoftware.api.ui.panel.TableViewPanel;
 import com.antennasoftware.api.ui.styles.StyleReceptor;
-import com.antennasoftware.core.foundation.config.Element;
-import com.antennasoftware.core.foundation.data.datasource.ext.DataSource;
 import com.antennasoftware.core.ui.control.ControlActionListener;
 
 public class AddToWatchlistPanel extends TablePanel implements

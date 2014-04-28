@@ -10,7 +10,6 @@ import com.antennasoftware.api.ui.Sizing;
 import com.antennasoftware.api.ui.TableViewCellListener;
 import com.antennasoftware.api.ui.Widget;
 import com.antennasoftware.api.ui.component.Cell;
-import com.antennasoftware.api.ui.control.Accessory;
 import com.antennasoftware.api.ui.control.Button;
 import com.antennasoftware.api.ui.control.Control;
 import com.antennasoftware.api.ui.control.Label;
