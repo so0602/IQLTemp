@@ -16,6 +16,8 @@ import com.antennasoftware.api.ui.panel.TablePanel;
 import com.antennasoftware.api.ui.styles.StyleReceptor;
 
 public class CompanyPanel extends TablePanel implements ContainerListener {
+	private IqltempApplication application = (IqltempApplication)getApplication();
+	private DefaultStyle style = application.getStyle();	
 	public int orientation;
 	private Label companyNameLabel;
 	private Label updateTimeLabel;
@@ -115,24 +117,29 @@ public class CompanyPanel extends TablePanel implements ContainerListener {
 		
 		updateTimeLabel = new Label();
 		updateTimeLabel.setForeColor(Color.create(124, 126, 125));
+		updateTimeLabel.setFont(style.getFont(12));
 		add(updateTimeLabel,"hfill=fill, vfill=fill");
 		
 		currencyLabel = new Label();
 		currencyLabel.setForeColor(Color.create(124, 126, 125));
+		currencyLabel.setFont(style.getFont(12));
 		add(currencyLabel,"hfill=fill, vfill=fill");
 		
 		priceTitleLabel = new Label();
 		priceTitleLabel.setForeColor(Color.create(124, 126, 125));
+		priceTitleLabel.setFont(style.getFont(12));
 		add(priceTitleLabel,"hfill=fill, vfill=fill");
 		
 		changeTitleLabel = new Label();
 		changeTitleLabel.setForeColor(Color.create(124, 126, 125));
 		changeTitleLabel.setHorizontalAlignment(HorizontalAlignmentType.RIGHT);
+		changeTitleLabel.setFont(style.getFont(12));
 		add(changeTitleLabel,"hfill=fill, vfill=fill");
 		
 		changePercentTitleLabel = new Label();
 		changePercentTitleLabel.setForeColor(Color.create(124, 126, 125));
 		changePercentTitleLabel.setHorizontalAlignment(HorizontalAlignmentType.RIGHT);
+		changePercentTitleLabel.setFont(style.getFont(12));
 		add(changePercentTitleLabel,"hfill=fill, vfill=fill");
 		
 		companyNameLabel.setText("NasdaqGS: AAPL");

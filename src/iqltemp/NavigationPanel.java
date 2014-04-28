@@ -153,7 +153,7 @@ public class NavigationPanel extends TablePanel implements ContainerListener {
 			break;
 		case NAVIGATION_STYLE_BLACK:
 			setBackColor(Colors.Black);
-			titleLabel.setForeColor(Colors.CadetBlue);
+			titleLabel.setForeColor(Color.create(0, 188, 223));
 			break;
 		case NAVIGATION_STYLE_WHITE:
 			setBackColor(Color.create(239, 239, 239));

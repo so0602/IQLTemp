@@ -8,16 +8,19 @@ import com.antennasoftware.api.ui.Colors;
 import com.antennasoftware.api.ui.Container;
 import com.antennasoftware.api.ui.Sizing;
 import com.antennasoftware.api.ui.TableViewCellListener;
+import com.antennasoftware.api.ui.TextClearMode;
 import com.antennasoftware.api.ui.Widget;
 import com.antennasoftware.api.ui.component.Cell;
 import com.antennasoftware.api.ui.control.Button;
 import com.antennasoftware.api.ui.control.Control;
 import com.antennasoftware.api.ui.control.Label;
 import com.antennasoftware.api.ui.control.Separator;
+import com.antennasoftware.api.ui.control.TextField;
 import com.antennasoftware.api.ui.panel.TablePanel;
 import com.antennasoftware.api.ui.panel.TableViewCell;
 import com.antennasoftware.api.ui.panel.TableViewPanel;
 import com.antennasoftware.api.ui.styles.StyleReceptor;
+import com.antennasoftware.api.ui.styles.TextFieldStyle;
 import com.antennasoftware.core.ui.control.ControlActionListener;
 
 public class AddToWatchlistTableViewCell extends TableViewCell implements
@@ -28,6 +31,7 @@ public class AddToWatchlistTableViewCell extends TableViewCell implements
 	
 	private TablePanel mainPanel;
 	private Label titleLabel;
+	private TextField titleTextField;
 	private Button addButton;
 	
 	public AddToWatchlistTableViewCell() {
@@ -63,6 +67,10 @@ public class AddToWatchlistTableViewCell extends TableViewCell implements
 		titleLabel.setForeColor(Color.create(203, 203, 203));
 		titleLabel.setFont(style.getBoldFont(18));
 		
+		titleTextField = new TextField();
+		titleTextField.setVisible(true);
+		titleTextField.setClearMode(TextClearMode.CLEAR_MODE_ALWAYS);
+		
 		addButton = new Button();
 		addButton.addListener(this);
 		addButton.setText("Add");
@@ -74,10 +82,12 @@ public class AddToWatchlistTableViewCell extends TableViewCell implements
 		mainPanel.setRowHeight(1, Sizing.PIXELS, 1);		
 		mainPanel.setColumnWidth(0, Sizing.PIXELS, 12);
 		mainPanel.setColumnWidth(1, Sizing.PREFERRED, 1);
-		mainPanel.setColumnWidth(2, Sizing.PIXELS, 50);
+		mainPanel.setColumnWidth(2, Sizing.PIXELS, 0);		
+		mainPanel.setColumnWidth(3, Sizing.PIXELS, 50);
 				
 		mainPanel.add(new Separator());
 		mainPanel.add(titleLabel, "hfill=fill,vfill=fill,valign=center");
+		mainPanel.add(titleTextField, "hfill=fill,vfill=fill,valign=center");		
 		mainPanel.add(addButton, "hfill=fill,vfill=fill,valign=center");
 		mainPanel.startNewRow();
 		
@@ -111,7 +121,22 @@ public class AddToWatchlistTableViewCell extends TableViewCell implements
 
 	public void onEditing(TableViewCell cell, boolean editing, boolean animated) {
 		// TODO Auto-generated method stub
+		if (editing) {
+			mainPanel.setColumnWidth(1, Sizing.PIXELS, 0);
+			mainPanel.setColumnWidth(2, Sizing.PREFERRED, 1);			
+			addButton.setVisible(false);
+			titleLabel.setVisible(false);
+			titleTextField.setVisible(true);
+			titleTextField.setText(titleLabel.getText());
+		}else {
+			mainPanel.setColumnWidth(1, Sizing.PREFERRED, 1);
+			mainPanel.setColumnWidth(2, Sizing.PIXELS, 0);			
+			addButton.setVisible(true);
+			titleLabel.setVisible(true);
+			titleTextField.setVisible(false);			
+		}
 		
+		cell.refresh();
 	}
 
 	public void onFocusGained(TableViewCell cell) {

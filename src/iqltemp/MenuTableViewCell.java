@@ -51,7 +51,7 @@ public class MenuTableViewCell extends TableViewCell implements
 		
 		titleLabel = new Label();
 		titleLabel.setForeColor(Color.create(203, 203, 203));
-		titleLabel.setFont(style.getBoldFont(14));
+		titleLabel.setFont(style.getBoldFont(18));
 		
 		mainPanel = new TablePanel();
 		mainPanel.setBackColor(Color.create(68, 68, 68));	
@@ -69,6 +69,7 @@ public class MenuTableViewCell extends TableViewCell implements
 		mainPanel.add(separator, "hfill=fill, vfill=fill, colspan=2");
 		
 		add(mainPanel, "hfill=fill, vfill=fill");
+		
 	}
 
 	public void onDeactivate(Container source) {

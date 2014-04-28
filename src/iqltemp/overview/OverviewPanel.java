@@ -74,7 +74,7 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 		mainTable = new StickyTable();
 		mainTable.addListener(this);
 		mainTable.setNumberOfGroups(1);
-		mainTable.setNumberOfCellsInGroup(0, 8);
+		mainTable.setNumberOfCellsInGroup(0, 2);
 		add(mainTable, "hfill=fill, vfill=fill");
 		startNewRow();
 	}
@@ -159,13 +159,15 @@ public class OverviewPanel extends TablePanel implements ContainerListener, Tabl
 			busDescTableViewCell.isExpand = busDescTableViewCellIsExpand;
 			
 			if( needReload ){
-				c.reload(group, row);
-			}else if( busDescTableViewCell.getHeight() != busDescTableViewCellHeight ){
-				c.reload(group, row);
+				c.reload(group, row);	
 			}
+//			else if( busDescTableViewCell.getHeight() != busDescTableViewCellHeight ){
+//				c.reload(group, row);
+//			}
 		}else if( cell instanceof OverviewFundChartBasicFinTableViewCell ){
 			((OverviewFundChartBasicFinTableViewCell)cell).populateData();
-		}
+			
+		}		
 	}
 
 	public void onCellSize(TableView c, AbsoluteSize sizeInfo, int group,
