@@ -7,7 +7,6 @@ import iqltemp.listeners.OnSizeChangeListener;
 import iqltemp.models.OverviewBusDesc;
 
 import com.antennasoftware.api.ui.Color;
-import com.antennasoftware.api.ui.Colors;
 import com.antennasoftware.api.ui.Container;
 import com.antennasoftware.api.ui.Font;
 import com.antennasoftware.api.ui.HorizontalAlignmentType;
@@ -49,10 +48,10 @@ public class OverviewBusDescTableViewCell extends TableViewCell implements
 	private TablePanel leftTablePanel;
 	private TablePanel rightTablePanel;
 	
-	private int incorporatedHeight;
-	private int headquartersHeight;
-	private int industryHeight;
-	private int descriptionHeight;
+	public int incorporatedHeight;
+	public int headquartersHeight;
+	public int industryHeight;
+	public int descriptionHeight;
 	
 	private int valueMaxWidth;
 	private int descMaxWidth;
@@ -225,7 +224,6 @@ public class OverviewBusDescTableViewCell extends TableViewCell implements
 		descrptionLabel = new Label();
 		descrptionLabel.setText("Apple Inc., together with subsidiaries, designs, manufactures, and markets mobile communication and media devices, personal computing products, and portable digital music players worldwide. Its products and services include iPhone, a handheld product that combines a mobile phone, an iPod, and an Internet communications device; iPad, a multi-purpose mobile device; desktop computers, such as iMac, Mac Pro, and Mac mini; portable computers, including MacBook Pro and MacBook Air; a line of iPod portable digital music and media players; and iCloud, and a cloud service. The company also offers a range of software products, including iOS and OS X operating system software consisting of Final Cut Pro, Logic Stuio, Logic Pro, and its FileMaker Pro database software. It also manufactures the Apple LED Cinema Display and Thunderbolt Display; sells a variety of Apple-branded");
 		descrptionLabel.setFont(style.getFont(12));
-		descrptionLabel.setBackColor(Colors.Azure);
 		descriptionHeight = Utilities.getLabelHeight(descrptionLabel, 0, descMaxWidth);
 		add(descrptionLabel,"hfill=fill, vfill=fill, colspan=4");
 		setRowHeight(5, Sizing.PIXELS, descriptionHeight);
