@@ -134,8 +134,7 @@ public class AddToWatchlistTableViewCell extends TableViewCell implements
 			addButton.setVisible(true);
 			titleLabel.setVisible(true);
 			titleTextField.setVisible(false);			
-		}
-		
+		}		
 		cell.refresh();
 	}
 
